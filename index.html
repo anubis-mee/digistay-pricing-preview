@@ -13,231 +13,225 @@
   --v900-hover:#4A058C;
   --b800:#161616; --b500:#636363; --b400:#808080; --b300:#9E9E9E; --b200:#BEBEBE; --b100:#DEDEDE;
   --grey-header:#F6F6F6; --white:#FFFFFF;
-  --blue-900:#0D47A1;
+  --blue-900:#0D47A1; --blue-200:#90CAF9; --blue-0:#E6ECF8;
   --g900:#1B5E20; --g50:#E8F5E9;
   --y900:#F57F17; --y50:#FFFDE7;
-  --info50:#E3F2FD;
   --link:var(--blue-900);
-  --bg-page:#ECEEF1;
+  --bg-page:#F6F6F8;
   --border:var(--b100);
   --text:var(--b800); --text-muted:var(--b500);
   --radius-card:8px; --radius-pill:999px;
   --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;} *{transition:none!important;}}
-body{font-family:var(--font);color:var(--text);background:var(--bg-page);font-size:14px;line-height:20px;}
+body{font-family:var(--font);color:var(--text);background:var(--bg-page);font-size:15px;line-height:22px;}
 a{color:var(--link);text-decoration:none;}
 a:hover{text-decoration:underline;}
 button{font-family:var(--font);cursor:pointer;}
 button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--v900);outline-offset:2px;}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px;}
 
-/* top nav */
+/* nav */
 .nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:60px;}
 .logo{display:flex;align-items:center;gap:10px;}
-.logo svg{width:33px;height:30px;}
-.wordmark{font-family:'Montserrat',sans-serif;font-weight:600;font-size:20px;letter-spacing:.4px;color:var(--v900);}
-.nav-cta{background:var(--v900);color:#fff;border:none;border-radius:var(--radius-card);padding:10px 18px;font-size:14px;font-weight:600;}
-.nav-cta:hover{background:var(--v900-hover);}
+.logo svg{width:30px;height:27px;}
+.wordmark{font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;letter-spacing:.4px;color:var(--v900);}
+.step-ind{font-size:12px;font-weight:600;color:var(--b400);letter-spacing:.6px;text-transform:uppercase;}
 
-/* hero */
-.hero{background:var(--white);padding:56px 0 40px;text-align:center;}
-.hero h1{font-size:36px;line-height:44px;font-weight:700;max-width:640px;margin:0 auto;}
-.hero p.sub{font-size:16px;line-height:24px;color:var(--text-muted);max-width:560px;margin:14px auto 0;}
-.hero .gst-note{font-size:12px;color:var(--b400);margin-top:8px;}
+/* progress */
+.prog{height:3px;background:var(--b100);}
+.prog span{display:block;height:3px;background:var(--v900);transition:width .3s;}
+@media (prefers-reduced-motion: reduce){.prog span{transition:none;}}
 
-/* term toggle */
-.terms{display:inline-flex;background:var(--grey-header);border:1px solid var(--border);border-radius:var(--radius-pill);padding:4px;margin-top:28px;flex-wrap:wrap;justify-content:center;}
-.terms button{border:none;background:transparent;border-radius:var(--radius-pill);padding:9px 18px;font-size:14px;font-weight:500;color:var(--b500);display:flex;align-items:center;gap:6px;}
-.terms button.on{background:var(--v900);color:#fff;font-weight:600;}
-.terms .save{font-size:10px;line-height:14px;font-weight:600;background:var(--g50);color:var(--g900);border-radius:var(--radius-pill);padding:1px 7px;}
-.terms button.on .save{background:rgba(255,255,255,.2);color:#fff;}
-.ob-strip{margin-top:14px;font-size:13px;color:var(--text-muted);}
-.ob-strip strong{color:var(--g900);font-weight:600;}
+/* wizard shell */
+.step{display:none;padding:40px 0 140px;}
+.step.on{display:block;}
+.step h1{font-size:28px;line-height:36px;font-weight:700;text-align:center;max-width:560px;margin:0 auto;}
+.step .lead{font-size:15px;color:var(--text-muted);text-align:center;max-width:520px;margin:10px auto 30px;}
 
-/* plan cards */
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:36px 0 0;align-items:stretch;}
-.plan{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);padding:24px;display:flex;flex-direction:column;text-align:left;position:relative;}
-.plan.featured{border:2px solid var(--v900);}
-.badge-pop{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--v900);color:#fff;font-size:10px;line-height:14px;font-weight:600;padding:3px 12px;border-radius:var(--radius-pill);white-space:nowrap;}
-.plan h3{font-size:18px;line-height:26px;font-weight:600;}
-.plan .for{font-size:12px;line-height:18px;color:var(--text-muted);margin-top:2px;min-height:36px;}
-.plan .price{margin:16px 0 2px;}
-.plan .price .amt{font-size:32px;line-height:38px;font-weight:700;}
-.plan .price .per{font-size:13px;color:var(--text-muted);}
-.plan .eff{font-size:12px;color:var(--b400);min-height:18px;}
-.plan .room-rule{margin:12px 0;font-size:12px;line-height:18px;font-weight:500;border-radius:var(--radius-card);padding:8px 10px;}
-.plan .room-rule.flat{background:var(--g50);color:var(--g900);}
-.plan .room-rule.per{background:var(--v0);color:var(--v900);}
-.plan ul{list-style:none;margin:6px 0 18px;flex:1;}
-.plan li{display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:19px;padding:4px 0;color:var(--b800);}
-.plan li.mut{color:var(--b400);}
-.plan li svg{flex:none;margin-top:3px;}
-.plan .cta{width:100%;border-radius:var(--radius-card);padding:12px 0;font-size:14px;font-weight:600;border:1px solid var(--v900);background:var(--white);color:var(--v900);}
-.plan .cta:hover{background:var(--v0);}
-.plan.featured .cta{background:var(--v900);color:#fff;}
-.plan.featured .cta:hover{background:var(--v900-hover);}
+/* step 1 — plan cards */
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.pcard{background:var(--white);border:2px solid var(--border);border-radius:12px;padding:18px 16px;cursor:pointer;text-align:left;position:relative;transition:border-color .15s;}
+.pcard:hover{border-color:var(--b300);}
+.pcard.sel{border-color:var(--v900);background:var(--v0);}
+.pcard.hs.sel{border-color:var(--blue-900);background:var(--blue-0);}
+.pcard .tick{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;border:2px solid var(--b200);background:var(--white);}
+.pcard.sel .tick{border-color:var(--v900);background:var(--v900);}
+.pcard.hs.sel .tick{border-color:var(--blue-900);background:var(--blue-900);}
+.pcard.sel .tick::after{content:'';position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);}
+.pcard .pop{display:inline-block;font-size:10px;line-height:14px;font-weight:600;background:var(--v900);color:#fff;border-radius:var(--radius-pill);padding:2px 9px;margin-bottom:8px;}
+.pcard .hsb{display:inline-block;font-size:10px;line-height:14px;font-weight:600;background:var(--blue-0);color:var(--blue-900);border:1px solid var(--blue-200);border-radius:var(--radius-pill);padding:2px 9px;margin-bottom:8px;}
+.pcard h3{font-size:17px;line-height:24px;font-weight:700;}
+.pcard .tag{font-size:12px;line-height:17px;color:var(--text-muted);margin:4px 0 10px;min-height:34px;}
+.pcard .from{font-size:13px;color:var(--b500);}
+.pcard .from strong{font-size:20px;color:var(--b800);font-weight:700;}
+.pcard .runits{font-size:11.5px;line-height:16px;color:var(--v900);background:var(--white);border-radius:6px;padding:5px 8px;margin-top:10px;font-weight:500;}
+.pcard.hs .runits{color:var(--blue-900);}
 
-/* homestay strip — deliberately distinct from the hotel plans */
-.plans{grid-template-columns:repeat(2,1fr);max-width:760px;margin-left:auto;margin-right:auto;}
-.hs-card{display:grid;grid-template-columns:1.3fr 1fr .8fr;gap:24px;align-items:center;background:var(--white);border:1px solid var(--blue-200);border-radius:var(--radius-card);padding:20px 24px;margin:24px auto 0;max-width:920px;text-align:left;}
-.hs-badge{display:inline-block;background:var(--blue-0);color:var(--blue-900);font-size:10px;line-height:14px;font-weight:600;padding:3px 10px;border-radius:var(--radius-pill);margin-bottom:8px;}
-.hs-card h3{font-size:18px;line-height:26px;font-weight:600;}
-.hs-desc{font-size:12px;line-height:18px;color:var(--text-muted);margin-top:2px;}
-.hs-feats{list-style:none;margin:0;}
-.hs-feats li{font-size:13px;line-height:19px;padding:4px 0 4px 18px;position:relative;color:var(--b800);}
-.hs-feats li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue-900);}
-.hs-buy{text-align:center;}
-.hs-price{font-size:26px;line-height:32px;font-weight:700;}
-.hs-price .per{font-size:13px;font-weight:400;color:var(--text-muted);}
-.hs-eff{font-size:12px;color:var(--b400);margin:2px 0 10px;}
-.hs-cta{width:100%;border-radius:var(--radius-card);padding:11px 0;font-size:14px;font-weight:600;border:1px solid var(--blue-900);background:var(--white);color:var(--blue-900);}
-.hs-cta:hover{background:var(--blue-0);}
-@media (max-width:900px){.plans{grid-template-columns:1fr;}.hs-card{grid-template-columns:1fr;}}
+/* feature table */
+.ftable{margin-top:26px;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.frow{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;align-items:center;border-bottom:1px solid var(--border);}
+.frow:last-child{border-bottom:none;}
+.frow>div{padding:11px 14px;font-size:13px;line-height:18px;text-align:center;}
+.frow>div:first-child{text-align:left;color:var(--b500);font-weight:500;}
+.frow.head>div{font-weight:700;color:var(--b800);font-size:13px;background:var(--grey-header);}
+.fcell.selcol{background:var(--v0);font-weight:600;color:var(--v900);}
+.frow.head .fcell.selcol{background:var(--v900);color:#fff;}
+.fy{color:var(--g900);font-weight:700;}
+.fn{color:var(--b200);}
+.fa{font-size:11.5px;color:var(--v900);font-weight:600;}
+.flink{background:none;border:none;padding:0;font-size:11.5px;font-weight:500;color:var(--link);cursor:pointer;}
+.flink:hover{text-decoration:underline;}
 
-/* checkout */
-.checkout{padding:48px 0 64px;}
-.checkout h2{font-size:24px;line-height:32px;font-weight:700;margin-bottom:4px;}
-.checkout .sub2{color:var(--text-muted);margin-bottom:24px;}
-.co-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start;}
-.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);padding:20px;}
-.card + .card{margin-top:16px;}
-.step-h{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-.step-n{width:24px;height:24px;border-radius:50%;background:var(--v900);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none;}
-.step-h h4{font-size:16px;line-height:24px;font-weight:600;}
-.pills{display:flex;gap:8px;flex-wrap:wrap;}
-.pill{border:1px solid var(--border);background:var(--white);border-radius:var(--radius-pill);padding:8px 16px;font-size:13px;font-weight:500;color:var(--b500);}
-.pill.on{border-color:var(--v900);background:var(--v0);color:var(--v900);font-weight:600;}
-.rooms-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-.stepper{display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:var(--radius-card);overflow:hidden;}
-.stepper button{width:38px;height:38px;border:none;background:var(--grey-header);font-size:18px;color:var(--b800);}
-.stepper button:hover{background:var(--b100);}
-.stepper input{width:64px;height:38px;border:none;text-align:center;font-family:var(--font);font-size:15px;font-weight:600;color:var(--b800);}
-.room-note{font-size:12px;line-height:18px;border-radius:var(--radius-card);padding:8px 12px;margin-top:12px;}
+/* step 2 — term cards */
+.tcards{display:flex;flex-direction:column;gap:12px;max-width:560px;margin:0 auto;}
+.tcard{display:flex;align-items:center;gap:14px;background:var(--white);border:2px solid var(--border);border-radius:12px;padding:16px 18px;cursor:pointer;text-align:left;}
+.tcard:hover{border-color:var(--b300);}
+.tcard.sel{border-color:var(--v900);background:var(--v0);}
+.tcard .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--b200);flex:none;position:relative;background:var(--white);}
+.tcard.sel .radio{border-color:var(--v900);}
+.tcard.sel .radio::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--v900);}
+.tcard .t-main{flex:1;}
+.tcard .t-name{font-size:15px;font-weight:700;}
+.tcard .t-note{font-size:12px;color:var(--text-muted);margin-top:1px;}
+.tcard .t-price{text-align:right;}
+.tcard .t-pm{font-size:18px;font-weight:700;}
+.tcard .t-pm span{font-size:12px;font-weight:400;color:var(--b500);}
+.tcard .t-billed{font-size:11.5px;color:var(--b400);}
+.badge{display:inline-block;font-size:10px;line-height:14px;font-weight:700;border-radius:var(--radius-pill);padding:2px 8px;margin-left:8px;vertical-align:2px;}
+.badge.best{background:var(--g50);color:var(--g900);}
+
+/* step 3 — rooms */
+.roomsbox{max-width:420px;margin:0 auto;text-align:center;}
+.bigstep{display:inline-flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white);}
+.bigstep button{width:56px;height:56px;border:none;background:var(--grey-header);font-size:24px;color:var(--b800);}
+.bigstep button:hover{background:var(--b100);}
+.bigstep input{width:96px;height:56px;border:none;text-align:center;font-family:var(--font);font-size:24px;font-weight:700;color:var(--b800);-moz-appearance:textfield;}
+.bigstep input::-webkit-outer-spin-button,.bigstep input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.room-note{font-size:13px;line-height:19px;border-radius:var(--radius-card);padding:10px 14px;margin-top:18px;display:inline-block;}
 .room-note.ok{background:var(--g50);color:var(--g900);}
 .room-note.info{background:var(--v0);color:var(--v900);}
-.room-note.warn{background:var(--y50);color:var(--y900);}
-.grp{margin-top:4px;}
-.grp + .grp{margin-top:18px;border-top:1px solid var(--border);padding-top:16px;}
-.grp .g-title{font-size:13px;font-weight:600;margin-bottom:2px;}
-.grp .g-sub{font-size:12px;color:var(--text-muted);margin-bottom:8px;}
-.opt{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--border);border-radius:var(--radius-card);margin-top:8px;cursor:pointer;background:var(--white);}
+
+/* step 4 — extras */
+.xgroups{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+.xcard{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.xcard .x-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.xcard .x-sub{font-size:12.5px;line-height:18px;color:var(--text-muted);margin:3px 0 6px;}
+.inc-tag{font-size:10px;font-weight:600;background:var(--g50);color:var(--g900);border-radius:var(--radius-pill);padding:2px 8px;white-space:nowrap;}
+.opt{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-card);margin-top:8px;cursor:pointer;background:var(--white);}
 .opt:hover{border-color:var(--b300);}
 .opt.on{border-color:var(--v900);background:var(--v0);}
-.opt input{accent-color:var(--v900);width:16px;height:16px;flex:none;}
-.opt .o-name{flex:1;font-size:13px;line-height:19px;font-weight:500;}
-.opt .o-desc{display:block;font-size:11px;line-height:15px;color:var(--text-muted);font-weight:400;}
-.opt .o-price{font-size:13px;font-weight:600;white-space:nowrap;}
+.opt input{accent-color:var(--v900);width:17px;height:17px;flex:none;}
+.opt .o-name{flex:1;font-size:13.5px;line-height:19px;font-weight:500;}
+.opt .o-desc{display:block;font-size:11.5px;line-height:16px;color:var(--text-muted);font-weight:400;}
+.opt .o-price{font-size:13.5px;font-weight:600;white-space:nowrap;}
 .opt .o-save{font-size:10px;font-weight:600;background:var(--g50);color:var(--g900);border-radius:var(--radius-pill);padding:1px 7px;margin-left:6px;}
-.opt.disab{opacity:.55;cursor:default;}
-.inc-tag{font-size:10px;font-weight:600;background:var(--g50);color:var(--g900);border-radius:var(--radius-pill);padding:2px 8px;white-space:nowrap;}
-details.ot{margin-top:16px;border-top:1px solid var(--border);padding-top:14px;}
-#kit-area{border-top:1px solid var(--border);margin-top:18px;padding-top:16px;}
-.kit-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
-.kit-row .k-name{flex:1;font-size:13px;font-weight:500;}
-.kit-row .k-b{border:none;background:var(--grey-header);font-size:16px;color:var(--b800);padding:0;}
-.kit-row .k-b:hover{background:var(--b100);}
-.kit-row input{border:none;text-align:center;font-family:var(--font);font-size:14px;font-weight:600;color:var(--b800);-moz-appearance:textfield;}
-.kit-row input::-webkit-outer-spin-button,.kit-row input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
-.kit-row .k-amt{min-width:80px;text-align:right;font-size:13px;font-weight:600;}
-.kit-total{display:flex;justify-content:space-between;font-size:13px;font-weight:600;padding:10px 0 0;color:var(--b800);}
-.kit-total span:last-child{font-size:15px;}
-details.ot summary{font-size:13px;font-weight:600;cursor:pointer;color:var(--b800);}
-details.ot summary span{color:var(--text-muted);font-weight:400;font-size:12px;}
+.pills{display:flex;gap:8px;flex-wrap:wrap;}
+.pill{border:1px solid var(--border);background:var(--white);border-radius:var(--radius-pill);padding:8px 16px;font-size:13px;font-weight:500;color:var(--b500);cursor:pointer;}
+.pill.on{border-color:var(--v900);background:var(--v0);color:var(--v900);font-weight:600;}
+.kit-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);}
+.kit-row:last-of-type{border-bottom:none;}
+.kit-row .k-name{flex:1;font-size:13.5px;font-weight:500;}
+.stepper{display:flex;align-items:center;border:1px solid var(--border);border-radius:var(--radius-card);overflow:hidden;}
+.stepper button{width:32px;height:32px;border:none;background:var(--grey-header);font-size:16px;color:var(--b800);padding:0;}
+.stepper button:hover{background:var(--b100);}
+.stepper input{width:52px;height:32px;border:none;text-align:center;font-family:var(--font);font-size:14px;font-weight:600;color:var(--b800);-moz-appearance:textfield;}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.kit-row .k-amt{min-width:76px;text-align:right;font-size:13px;font-weight:600;}
+.kit-total{display:flex;justify-content:space-between;font-size:13px;font-weight:600;padding:10px 0 0;}
+.dir-link{background:none;border:none;padding:0;font-size:12px;font-weight:500;color:var(--link);cursor:pointer;}
+.dir-link:hover{text-decoration:underline;}
 
-/* summary */
-.summary{position:sticky;top:84px;}
-.summary .card{padding:22px;}
-.summary h4{font-size:16px;font-weight:600;margin-bottom:2px;}
-.summary .s-plan{font-size:12px;color:var(--text-muted);margin-bottom:14px;}
-.srow{display:flex;justify-content:space-between;gap:10px;font-size:13px;line-height:19px;padding:5px 0;}
+/* step 5 — review */
+.review{max-width:520px;margin:0 auto;}
+.rcard{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px;}
+.srow{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;line-height:19px;padding:5px 0;}
 .srow .l{color:var(--b500);}
 .srow .l small{display:block;font-size:11px;color:var(--b300);}
 .srow .r{font-weight:500;white-space:nowrap;}
-.srow.total{border-top:1px solid var(--border);margin-top:8px;padding-top:12px;font-size:16px;font-weight:700;}
+.srow.total{border-top:1px solid var(--border);margin-top:8px;padding-top:12px;font-size:17px;font-weight:700;}
 .srow.total .l{color:var(--b800);font-weight:700;}
-.srow .strike{text-decoration:line-through;color:var(--b300);font-weight:400;margin-right:6px;}
 .free{color:var(--g900);font-weight:700;}
-.once-note{font-size:11px;line-height:16px;color:var(--b400);margin:2px 0 0;text-align:right;}
-.coupon-box{border-top:1px dashed var(--b100);margin-top:10px;padding-top:12px;}
-.coupon-apply{border:1px solid var(--v900);background:var(--white);color:var(--v900);border-radius:var(--radius-card);padding:0 16px;height:36px;font-size:13px;font-weight:600;flex:none;}
+.once-note{font-size:11.5px;line-height:16px;color:var(--b400);margin:2px 0 0;text-align:right;}
+.coupon-box{border-top:1px dashed var(--b100);margin-top:12px;padding-top:14px;}
+.coupon-in{height:40px;flex:1;min-width:0;border:1px solid var(--border);border-radius:var(--radius-card);padding:0 12px;font-family:var(--font);font-size:13px;text-transform:uppercase;}
+.coupon-in:focus{border-color:var(--v900);outline:none;}
+.coupon-apply{border:1px solid var(--v900);background:var(--white);color:var(--v900);border-radius:var(--radius-card);padding:0 18px;height:40px;font-size:13px;font-weight:600;flex:none;}
 .coupon-apply:hover{background:var(--v0);}
-.coupon-hint{font-size:12px;line-height:17px;margin-top:8px;color:var(--g900);background:var(--g50);border-radius:var(--radius-card);padding:7px 10px;cursor:pointer;display:none;}
+.coupon-hint{font-size:12.5px;line-height:18px;margin-top:9px;color:var(--g900);background:var(--g50);border-radius:var(--radius-card);padding:8px 11px;cursor:pointer;display:none;}
 .coupon-hint:hover{text-decoration:underline;}
 .coupon-hint.applied{cursor:default;}
 .coupon-hint.applied:hover{text-decoration:none;}
-.coupon-err{display:none;font-size:12px;color:var(--r900);margin-top:6px;}
-.coupon-dd{display:none;position:absolute;top:40px;left:0;right:0;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:30;overflow:hidden;}
+.coupon-err{display:none;font-size:12px;color:#B71C1C;margin-top:6px;}
+.coupon-dd{display:none;position:absolute;top:44px;left:0;right:0;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:30;overflow:hidden;}
 .coupon-dd.open{display:block;}
 .cdd-item{padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;}
 .cdd-item:last-child{border-bottom:none;}
 .cdd-item:hover{background:var(--v0);}
-.cdd-code{font-size:13px;font-weight:700;color:var(--b800);}
+.cdd-code{font-size:13px;font-weight:700;}
 .cdd-tag{font-size:10px;font-weight:600;border-radius:var(--radius-pill);padding:1px 8px;margin-left:8px;vertical-align:1px;}
 .cdd-tag.ok{background:var(--g50);color:var(--g900);}
 .cdd-tag.sw{background:var(--blue-0);color:var(--blue-900);}
 .cdd-sub{font-size:11px;line-height:15px;color:var(--text-muted);margin-top:1px;}
-.renew-box{background:var(--v0);border:1px solid var(--v100);border-radius:var(--radius-card);padding:12px 14px;margin-top:14px;}
+.renew-box{background:var(--v0);border:1px solid var(--v100);border-radius:var(--radius-card);padding:14px 16px;margin-top:16px;}
 .renew-box .rb-label{font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--v900);}
-.renew-box .rb-amt{font-size:22px;line-height:28px;font-weight:700;color:var(--v900);margin-top:2px;}
+.renew-box .rb-amt{font-size:24px;line-height:30px;font-weight:700;color:var(--v900);margin-top:2px;}
 .renew-box .rb-sub{font-size:12px;line-height:18px;color:var(--v900);margin-top:1px;}
-.renew-box .rb-note{font-size:11px;line-height:16px;color:var(--b500);margin-top:8px;border-top:1px solid var(--v100);padding-top:8px;}
-.pay-btn{width:100%;margin-top:16px;background:var(--v900);color:#fff;border:none;border-radius:var(--radius-card);padding:14px 0;font-size:15px;font-weight:600;}
-.pay-btn:hover{background:var(--v900-hover);}
-.pay-sub{text-align:center;font-size:11px;color:var(--b400);margin-top:10px;line-height:16px;}
+.renew-box .rb-note{font-size:11.5px;line-height:16px;color:var(--b500);margin-top:9px;border-top:1px solid var(--v100);padding-top:9px;}
+.pay-sub{text-align:center;font-size:11.5px;color:var(--b400);margin-top:12px;line-height:17px;}
+.pay-note{display:none;margin-top:12px;background:var(--blue-0);color:var(--blue-900);font-size:12px;line-height:18px;border-radius:var(--radius-card);padding:10px 12px;}
 .talk{display:block;text-align:center;margin-top:12px;font-size:13px;font-weight:500;}
-.pay-note{display:none;margin-top:12px;background:var(--info50);color:var(--blue-900);font-size:12px;line-height:18px;border-radius:var(--radius-card);padding:10px 12px;}
 
-/* compare + faq */
-.compare{padding:8px 0 48px;}
-.compare h2,.faq h2{font-size:24px;line-height:32px;font-weight:700;margin-bottom:20px;text-align:center;}
-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);overflow:hidden;}
-th,td{padding:11px 14px;font-size:13px;line-height:19px;text-align:center;border-bottom:1px solid var(--border);}
-th{background:var(--grey-header);font-weight:600;}
-td:first-child,th:first-child{text-align:left;font-weight:500;}
-td .y{color:var(--g900);font-weight:700;}
-td .n{color:var(--b200);}
-td .ad{font-size:11px;color:var(--v900);font-weight:600;}
-.faq{padding:8px 0 72px;max-width:720px;margin:0 auto;}
-.faq details{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);padding:14px 18px;margin-bottom:10px;}
-.faq summary{font-size:14px;font-weight:600;cursor:pointer;}
+/* sticky bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:1px solid var(--border);z-index:60;box-shadow:0 -4px 16px rgba(0,0,0,.06);}
+.bar-in{display:flex;align-items:center;gap:16px;height:76px;}
+.bar .bt{flex:1;min-width:0;}
+.bar .bt .b1{font-size:16px;font-weight:700;}
+.bar .bt .b2{font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.btn-back{border:1px solid var(--border);background:var(--white);color:var(--b500);border-radius:var(--radius-card);padding:13px 20px;font-size:14px;font-weight:600;}
+.btn-back:hover{background:var(--grey-header);}
+.btn-next{border:none;background:var(--v900);color:#fff;border-radius:var(--radius-card);padding:13px 34px;font-size:15px;font-weight:600;}
+.btn-next:hover{background:var(--v900-hover);}
+
+/* faq */
+.faq{max-width:640px;margin:34px auto 0;}
+.faq h2{font-size:18px;font-weight:700;text-align:center;margin-bottom:14px;}
+.faq details{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);padding:13px 16px;margin-bottom:8px;}
+.faq summary{font-size:13.5px;font-weight:600;cursor:pointer;}
 .faq p{font-size:13px;line-height:20px;color:var(--text-muted);margin-top:8px;}
-.footer{background:var(--white);border-top:1px solid var(--border);padding:24px 0;text-align:center;font-size:12px;color:var(--b400);}
+.gst-note{text-align:center;font-size:11.5px;color:var(--b400);margin-top:14px;}
 
-/* integrations directory modal */
-.dir-link{background:none;border:none;padding:0;font-size:12px;font-weight:500;color:var(--link);cursor:pointer;}
-.dir-link:hover{text-decoration:underline;}
+/* directory modal */
 .dir-overlay{display:none;position:fixed;inset:0;background:rgba(22,22,22,.30);z-index:100;align-items:flex-start;justify-content:center;padding:5vh 16px;}
 .dir-overlay.open{display:flex;}
-.dir-card{background:var(--white);border-radius:var(--radius-card);max-width:760px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.18);}
+.dir-card{background:var(--white);border-radius:12px;max-width:760px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.18);}
 .dir-head{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
-.dir-head h4{font-size:18px;line-height:26px;font-weight:600;}
+.dir-head h4{font-size:17px;line-height:24px;font-weight:700;}
 .dir-head p{font-size:12px;line-height:18px;color:var(--text-muted);margin-top:2px;}
-.dir-close{margin-left:auto;flex:none;border:1px solid var(--border);background:var(--white);border-radius:var(--radius-card);width:32px;height:32px;font-size:16px;color:var(--b500);}
+.dir-close{margin-left:auto;flex:none;border:1px solid var(--border);background:var(--white);border-radius:var(--radius-card);width:32px;height:32px;font-size:15px;color:var(--b500);}
 .dir-close:hover{background:var(--grey-header);}
 .dir-tools{padding:12px 22px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
-.dir-search{flex:1;min-width:200px;height:38px;border:1px solid var(--border);border-radius:var(--radius-card);padding:0 12px;font-family:var(--font);font-size:13px;color:var(--b800);}
+.dir-search{flex:1;min-width:200px;height:38px;border:1px solid var(--border);border-radius:var(--radius-card);padding:0 12px;font-family:var(--font);font-size:13px;}
 .dir-search:focus{border-color:var(--v900);outline:none;}
 .dir-count{font-size:12px;color:var(--text-muted);white-space:nowrap;}
 .dir-body{padding:14px 22px 20px;overflow-y:auto;}
 .dir-sec{font-size:11px;font-weight:600;color:var(--b400);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 8px;}
 .chips{display:flex;flex-wrap:wrap;gap:6px;}
-.chip{font-size:12px;line-height:16px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-pill);color:var(--b800);background:var(--white);}
+.chip{font-size:12px;line-height:16px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-pill);background:var(--white);}
 .chip.lg{display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 8px;}
 .chip.lg img{height:18px;width:auto;max-width:70px;object-fit:contain;border-radius:2px;flex:none;}
 .mono{width:18px;height:18px;border-radius:4px;background:var(--v0);color:var(--v900);font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:none;}
 .dir-sec-wrap{margin-bottom:6px;}
 .dir-empty{font-size:13px;color:var(--text-muted);padding:10px 0;}
 
-@media (max-width:900px){
-  .plans{grid-template-columns:1fr;}
-  .co-grid{grid-template-columns:1fr;}
-  .summary{position:static;}
-  .hero h1{font-size:28px;line-height:36px;}
-  th,td{padding:9px 8px;font-size:12px;}
+@media (max-width:760px){
+  .pcards{grid-template-columns:1fr;}
+  .pcard .tag{min-height:0;}
+  .frow{grid-template-columns:1.2fr 1fr 1fr 1fr;}
+  .frow>div{padding:9px 6px;font-size:11.5px;}
+  .step h1{font-size:22px;line-height:30px;}
+  .bar .bt .b2{display:none;}
 }
 </style>
 </head>
@@ -254,140 +248,105 @@ td .ad{font-size:11px;color:var(--v900);font-weight:600;}
       </svg>
       <span class="wordmark">DIGISTAY</span>
     </div>
-    <button class="nav-cta" onclick="showScreen(2)">Get started</button>
+    <span class="step-ind" id="step-ind">Step 1 of 5</span>
   </div>
+  <div class="prog"><span id="prog" style="width:20%"></span></div>
 </nav>
 
-<header class="hero" id="screen-select">
-  <div class="wrap">
-    <h1>Simple pricing that grows room by room.</h1>
-    <p class="sub">Basic and Advance include 15 rooms; Homestay starts at one unit. Add rooms, OTA channel power, modules and branded kits only when you need them.</p>
-    <p class="gst-note">All prices in INR, exclusive of 18% GST.</p>
+<main class="wrap">
 
-    <div class="terms" role="tablist" aria-label="Billing term">
-      <button data-term="m" role="tab">Monthly</button>
-      <button data-term="q" role="tab">Quarterly <span class="save">Save 6%</span></button>
-      <button data-term="h" role="tab">Half-yearly <span class="save">Save 17%</span></button>
-      <button data-term="y" class="on" role="tab">Yearly <span class="save">Save up to 32%</span></button>
+  <section class="step on" id="step-1">
+    <h1>Choose the plan that's right for you</h1>
+    <p class="lead">Change or cancel your plan at any renewal. All prices in INR, exclusive of 18% GST.</p>
+    <div class="pcards" id="pcards"></div>
+    <div class="ftable" id="ftable"></div>
+    <div class="faq">
+      <h2>Common questions</h2>
+      <details><summary>What is the one-time onboarding fee?</summary><p>₹4,999 covers everything to go live: data migration, OTA connections, staff training and your dedicated relationship manager's setup time. It is charged once per property, never again. Coupon codes are available on longer billing terms — checkout shows you the code that applies, up to a fully-waived onboarding fee on yearly billing.</p></details>
+      <details><summary>How does per-room pricing work?</summary><p>Basic and Advance both include 15 rooms, and you can add as many rooms as you want on either plan. Beyond 15, Basic adds ₹50 per room per month and Advance adds ₹150 — the difference reflects the real cost of syncing each extra room's rates and availability to OTAs and Google.</p></details>
+      <details><summary>How is a homestay priced?</summary><p>By the unit, not the key. One listing — however many bedrooms or keys are inside it — is one unit, and Homestay starts at exactly one unit. Each additional listing adds ₹500 per unit per month.</p></details>
+      <details><summary>What's the difference between the Basic and Advanced Channel Manager?</summary><p>The Basic Channel Manager (an add-on on Basic and Homestay) syncs rates and availability directly to 50+ major OTAs — Booking.com, MakeMyTrip-Goibibo, Agoda, Airbnb, Expedia and more — with 400+ integrations in total via Channex. The Advanced Channel Manager, built into the Advance plan, connects our advanced distribution network of 2,000+ channels and partners — OTAs, GDS, wholesalers and metasearch — plus Google Hotel ARI and the revenue-management tool.</p></details>
+      <details><summary>Are prices inclusive of GST?</summary><p>Prices are exclusive of GST. 18% GST is added at checkout and shown clearly before you pay — you'll receive a GST invoice for input credit.</p></details>
     </div>
-    <p class="ob-strip" id="ob-strip"></p>
+  </section>
 
-    <div class="plans" id="plan-cards"></div>
-    <div id="homestay-strip"></div>
-  </div>
-</header>
+  <section class="step" id="step-2">
+    <h1>How would you like to pay?</h1>
+    <p class="lead" id="term-lead"></p>
+    <div class="tcards" id="tcards"></div>
+    <p class="gst-note" id="ob-note"></p>
+  </section>
 
-<section class="checkout" id="checkout">
-  <div class="wrap">
-    <button class="dir-link" style="font-size:13px;" onclick="showScreen(1)">← Back to plans</button>
-    <h2 id="co-title" style="margin-top:6px;">Configure your plan</h2>
-    <p class="sub2">Your total updates live — what you see is what you pay.</p>
-    <div class="co-grid">
-      <div>
-        <div class="card">
-          <div class="step-h"><span class="step-n">1</span><h4>Billing term</h4></div>
-          <div class="pills" id="co-terms"></div>
-        </div>
-
-        <div class="card">
-          <div class="step-h"><span class="step-n">2</span><h4 id="rooms-title">How many rooms?</h4></div>
-          <div class="rooms-row">
-            <span style="font-size:13px;color:var(--text-muted);" id="rooms-label"></span>
-            <div class="stepper">
-              <button type="button" aria-label="Fewer rooms" onclick="bump(-1)">−</button>
-              <input id="rooms" type="number" min="1" max="200" value="12" inputmode="numeric" aria-label="Number of rooms">
-              <button type="button" aria-label="More rooms" onclick="bump(1)">+</button>
-            </div>
-          </div>
-          <div class="room-note" id="room-note"></div>
-        </div>
-
-        <div class="card">
-          <div class="step-h"><span class="step-n">3</span><h4>Add-ons</h4></div>
-          <div id="addon-area"></div>
-          <div class="grp" id="kit-area"></div>
-          <details class="ot" open>
-            <summary>One-time setup services <span>— OTA listings, website, Google</span></summary>
-            <div id="onetime-area"></div>
-          </details>
-        </div>
+  <section class="step" id="step-3">
+    <h1 id="rooms-title">How many rooms do you have?</h1>
+    <p class="lead" id="rooms-lead"></p>
+    <div class="roomsbox">
+      <div class="bigstep">
+        <button type="button" aria-label="Fewer" onclick="bump(-1)">−</button>
+        <input id="rooms" type="number" min="1" max="200" value="12" inputmode="numeric" aria-label="Count">
+        <button type="button" aria-label="More" onclick="bump(1)">+</button>
       </div>
-
-      <aside class="summary">
-        <div class="card">
-          <h4>Order summary</h4>
-          <p class="s-plan" id="s-plan"></p>
-          <div id="s-lines"></div>
-          <div class="coupon-box">
-            <div style="position:relative;">
-              <div style="display:flex;gap:8px;">
-                <input class="dir-search" id="coupon-in" type="text" placeholder="Coupon code — tap to see available" aria-label="Coupon code" autocomplete="off" style="height:36px;flex:1;min-width:0;text-transform:uppercase;">
-                <button type="button" class="coupon-apply" onclick="applyCoupon()">Apply</button>
-              </div>
-              <div class="coupon-dd" id="coupon-dd"></div>
-            </div>
-            <p class="coupon-hint" id="coupon-hint"></p>
-            <p class="coupon-err" id="coupon-err"></p>
-          </div>
-          <div class="srow" id="coupon-line" style="display:none;"><span class="l" id="coupon-line-l"></span><span class="r free" id="coupon-line-v"></span></div>
-          <div class="srow"><span class="l">GST (18%)</span><span class="r" id="s-gst"></span></div>
-          <div class="srow total"><span class="l">Pay today</span><span class="r" id="s-total"></span></div>
-          <p class="once-note" id="s-once-note"></p>
-          <div class="renew-box">
-            <p class="rb-label" id="rb-label">Every renewal after</p>
-            <p class="rb-amt"><span id="s-renew"></span></p>
-            <p class="rb-sub" id="s-renew-sub"></p>
-            <p class="rb-note">Onboarding, kits and setup services are one-time — they are never charged again.</p>
-          </div>
-          <button class="pay-btn" onclick="payStub()">Continue to secure payment</button>
-          <p class="pay-sub">Powered by Zoho Billing · UPI, cards &amp; netbanking<br>Cancel or change your term at any renewal.</p>
-          <div class="pay-note" id="pay-note">This demo stops here — in production this button opens the Zoho Billing hosted checkout with your exact configuration.</div>
-          <a class="talk" href="https://wa.me/916397009762">Prefer to talk? WhatsApp us →</a>
-        </div>
-      </aside>
+      <div><span class="room-note" id="room-note"></span></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="compare" id="compare-sec">
-  <div class="wrap">
-    <h2>Compare plans</h2>
-    <table>
-      <thead><tr><th style="width:34%">Feature</th><th>Basic</th><th>Advance</th><th>Homestay</th></tr></thead>
-      <tbody>
-        <tr><td>Rooms / units included</td><td>15 rooms, then ₹50/room — add as many as you want</td><td>15 rooms, then ₹150/room</td><td>1 unit (unlimited keys), then ₹500/unit</td></tr>
-        <tr><td>Front desk, calendar, billing, ledger</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
-        <tr><td>Booking engine + direct booking</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
-        <tr><td>WhatsApp guest communication</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
-        <tr><td>Digi AI + BI dashboard</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
-        <tr><td>Channel manager (OTA sync)</td><td><span class="ad">Basic CM add-on</span> <button class="dir-link" onclick="openDir('basic')">view OTAs</button></td><td><span class="y">✓ Advanced CM</span> <button class="dir-link" onclick="openDir('adv')">view 2,000+</button></td><td><span class="ad">Basic CM add-on</span> <button class="dir-link" onclick="openDir('basic')">view OTAs</button></td></tr>
-        <tr><td>Google Hotel ARI integration</td><td><span class="n">—</span></td><td><span class="y">✓</span></td><td><span class="n">—</span></td></tr>
-        <tr><td>Revenue management (RMS)</td><td><span class="ad">Add-on</span></td><td><span class="y">✓</span></td><td><span class="ad">Add-on</span></td></tr>
-        <tr><td>Smart / self check-in</td><td><span class="ad">Add-on</span></td><td><span class="y">✓</span></td><td><span class="ad">Add-on</span></td></tr>
-        <tr><td>Form C (foreign guests)</td><td><span class="ad">Add-on</span></td><td><span class="y">✓</span></td><td><span class="ad">Add-on</span></td></tr>
-        <tr><td>F&amp;B: restaurant + in-room dining</td><td><span class="ad">Add-on</span></td><td><span class="ad">Add-on</span></td><td><span class="ad">Add-on</span></td></tr>
-        <tr><td>Dedicated relationship manager</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+  <section class="step" id="step-4">
+    <h1>Anything extra?</h1>
+    <p class="lead">All optional — skip if you just want the plan. You can add these later too.</p>
+    <div class="xgroups">
+      <div class="xcard" id="addon-area"></div>
+      <div class="xcard" id="kit-area"></div>
+      <div class="xcard" id="onetime-card">
+        <p class="x-title">One-time setup services</p>
+        <p class="x-sub">Charged once on your first invoice — OTA listings, Google, website.</p>
+        <div id="onetime-area"></div>
+      </div>
+    </div>
+  </section>
 
-<section class="faq" id="faq-sec">
-  <div class="wrap">
-    <h2>Questions, answered</h2>
-    <details><summary>What is the one-time onboarding fee?</summary><p>₹4,999 covers everything to go live: data migration, OTA connections, staff training and your dedicated relationship manager's setup time. It is charged once per property, never again. Coupon codes are available on longer billing terms — the checkout shows you the code that applies to your plan, up to a fully-waived onboarding fee on yearly billing.</p></details>
-    <details><summary>How does per-room pricing work?</summary><p>Basic and Advance both include 15 rooms, and you can add as many rooms as you want on either plan. Beyond 15, Basic adds ₹50 per room per month and Advance adds ₹150 — the difference reflects the real cost of syncing each extra room's rates and availability to OTAs and Google. You only ever pay for the rooms you actually operate.</p></details>
-    <details><summary>How is a homestay priced?</summary><p>By the unit, not the key. One listing — however many bedrooms or keys are inside it — is one unit, and Homestay starts at exactly one unit. Each additional listing you operate adds ₹500 per unit per month.</p></details>
-    <details><summary>What's in the setup kit?</summary><p>Printed QR codes — you choose the quantity of each: self check-in QRs, room dining QRs, and table QRs for your restaurant. Then pick one branding level for the whole kit: standard (DigiStay design with your property name, ₹200 per QR), co-branded (your logo alongside DigiStay, ₹300), or fully custom-branded with design service included (₹400). All kit items are one-time purchases delivered at onboarding.</p></details>
-    <details><summary>Can I start monthly and switch to yearly later?</summary><p>Yes — that's the recommended path if you want to try before committing. And if you upgrade to a longer term within your first 90 days, we credit the onboarding-fee difference back to your invoice.</p></details>
-    <details><summary>What's the difference between the Basic and Advanced Channel Manager?</summary><p>The Basic Channel Manager (an add-on on Basic and Homestay) syncs rates and availability directly to 50+ major OTAs — Booking.com, MakeMyTrip-Goibibo, Agoda, Airbnb, Expedia, Trip.com and more — with 400+ integrations in total via Channex, for every room on your plan. The Advanced Channel Manager, built into the Advance plan, connects our advanced distribution network of 2,000+ channels and partners worldwide — OTAs, GDS, wholesalers and metasearch — plus Google Hotel ARI and the revenue-management tool. Tap "view integrations" anywhere on this page to browse both directories with logos.</p></details>
-    <details><summary>Are prices inclusive of GST?</summary><p>Prices are exclusive of GST. 18% GST is added at checkout and shown clearly before you pay — you'll receive a GST invoice for input credit.</p></details>
-  </div>
-</section>
+  <section class="step" id="step-5">
+    <h1>Review your order</h1>
+    <p class="lead" id="review-lead"></p>
+    <div class="review">
+      <div class="rcard">
+        <div id="s-lines"></div>
+        <div class="coupon-box">
+          <div style="position:relative;">
+            <div style="display:flex;gap:8px;">
+              <input class="coupon-in" id="coupon-in" type="text" placeholder="Coupon code — tap to see available" aria-label="Coupon code" autocomplete="off">
+              <button type="button" class="coupon-apply" onclick="applyCoupon()">Apply</button>
+            </div>
+            <div class="coupon-dd" id="coupon-dd"></div>
+          </div>
+          <p class="coupon-hint" id="coupon-hint"></p>
+          <p class="coupon-err" id="coupon-err"></p>
+        </div>
+        <div class="srow" id="coupon-line" style="display:none;"><span class="l" id="coupon-line-l"></span><span class="r free" id="coupon-line-v"></span></div>
+        <div class="srow"><span class="l">GST (18%)</span><span class="r" id="s-gst"></span></div>
+        <div class="srow total"><span class="l">Pay today</span><span class="r" id="s-total"></span></div>
+        <p class="once-note" id="s-once-note"></p>
+        <div class="renew-box">
+          <p class="rb-label" id="rb-label">Then every year</p>
+          <p class="rb-amt"><span id="s-renew"></span></p>
+          <p class="rb-sub" id="s-renew-sub"></p>
+          <p class="rb-note">Onboarding, kits and setup services are one-time — they are never charged again.</p>
+        </div>
+        <p class="pay-sub">Powered by Zoho Billing · UPI, cards &amp; netbanking<br>Cancel or change your term at any renewal.</p>
+        <div class="pay-note" id="pay-note">This preview stops here — in production this button opens the Zoho Billing hosted checkout with your exact configuration.</div>
+        <a class="talk" href="https://wa.me/916397009762">Prefer to talk? WhatsApp us →</a>
+      </div>
+    </div>
+  </section>
 
-<footer class="footer">
-  <div class="wrap">DigiStay · Openquest Tech Private Limited · Prices in INR, exclusive of 18% GST</div>
-</footer>
+</main>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <div class="bt"><div class="b1" id="bar-total"></div><div class="b2" id="bar-sub"></div></div>
+    <button class="btn-back" id="btn-back" onclick="nav(-1)">Back</button>
+    <button class="btn-next" id="btn-next" onclick="nav(1)">Continue</button>
+  </div>
+</div>
 
 <div class="dir-overlay" id="dir" role="dialog" aria-modal="true" aria-labelledby="dir-title" onclick="if(event.target===this)closeDir()">
   <div class="dir-card">
@@ -410,23 +369,35 @@ td .ad{font-size:11px;color:var(--v900);font-weight:600;}
 </div>
 
 <script>
+var DIR_DATA={"basic":[{"n":"Agoda","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/agoda-logo.jpg"},{"n":"Airbnb","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/airbnb-logo.png"},{"n":"Bed-and-Breakfast.it","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-bedandbreakfast-it.png"},{"n":"Bookeasy","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/592fc0e3-4382-414f-a873-fe6397751604.png"},{"n":"Booking.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/bookingcom-logo.png"},{"n":"Check24","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/check24-logo.png"},{"n":"Ctoutvert / Secureholiday","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-ctoutvert.png"},{"n":"Despegar","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/5497aac5-58cb-4673-9dc0-3513cb38f1a0.png"},{"n":"Didatravel","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/524270f8-c22d-41b4-8acd-a5f302d9b08d.png"},{"n":"eDreams","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/edreams-logo.png"},{"n":"Emerging Travel Group","l":"https://channex.io/images/integrations/etg-logo.svg"},{"n":"Expedia","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/expedia-logo.png"},{"n":"Getaroom","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/a008ef7d-2bb3-4f59-a31d-95660d6140e5.png"},{"n":"Goibibo","l":"https://www.google.com/s2/favicons?domain=goibibo.com&sz=64"},{"n":"Google Hotels & Vacation Rentals","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/google-hotels-logo.png"},{"n":"Hipcamp","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hipcamp-logo.png"},{"n":"Hookusbookus","l":null},{"n":"Hopper","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/7b05812a-9203-4c34-b995-9a7fcbd64216.png"},{"n":"Hostelhop","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/64209784-51e7-4dcd-9fdf-29491a43908f.png"},{"n":"Hostelworld","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hostelworld-logo.png"},{"n":"Hotel Tonight","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hoteltonight-logo.png"},{"n":"Hotelbeds","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hotelbeds-logo.png"},{"n":"Hotelnetwork","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/6aba2cfe-3309-4b59-ba28-b19cda8e32e4.png"},{"n":"HotelREZ","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hotelrez-logo.png"},{"n":"Hoterip","l":null},{"n":"HRS","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hrs-logo.png"},{"n":"HRS Australia","l":null},{"n":"Hyperguest","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da51353c-aaa9-4fa4-ba27-c0c34f952887.png"},{"n":"Inntopia","l":null},{"n":"Klook","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/klook-logo.png"},{"n":"LocalOTA","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-localota.jpg"},{"n":"MakeMyTrip","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/7ad7313e-823b-4d7b-81ef-2c6ff7dde322.png"},{"n":"MG Bedbank","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mg-bedbank-logo.png"},{"n":"Ministry of Villas","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ministryofvillas-logo.png"},{"n":"Mitchell Corp","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mitchell-logo.jpeg"},{"n":"Moverii","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/moverii-logo.png"},{"n":"Mr & Mrs Smith","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mrandmrssmith-logo.jpg"},{"n":"OpenGDS.com","l":null},{"n":"Pitchup","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/82d1b7f7-d608-45d1-8f33-80c1ca408e78.png"},{"n":"PriceTravel","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/pricetravel-logo.jpg"},{"n":"Ratedock","l":null},{"n":"Reconline","l":null},{"n":"Resonline","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-resonline.png"},{"n":"Roibos","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da970051-848f-499c-a8cc-2c650fae0caf.png"},{"n":"Roombeast","l":null},{"n":"Spot2nite","l":null},{"n":"Szallas","l":null},{"n":"Tablet Michelin","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tablet-michelin-logo.png"},{"n":"Tiket","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tiket-logo.webp"},{"n":"TravelgateX","l":null},{"n":"Traveloka","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/traveloka-logo.png"},{"n":"Travia","l":null},{"n":"Trip.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tripcom-logo.png"},{"n":"VRBO","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/vrbo-logo.png"},{"n":"Waverick","l":null},{"n":"Wink","l":null},{"n":"World2Meet (W2M)","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-world2meet.jpeg"}],"adv":{"cats":[[41,"OTAs"],[28,"GDS"],[27,"Metasearch Engines"],[26,"Wholesalers"]],"items":[{"n":"Abritel","l":null,"c":[41]},{"n":"Agoda","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/agoda-logo.jpg","c":[41]},{"n":"AirAsia","l":null,"c":[41]},{"n":"Airbnb","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/airbnb-logo.png","c":[41]},{"n":"Almosafer","l":null,"c":[41]},{"n":"AltoVita","l":null,"c":[41]},{"n":"Amadeus","l":null,"c":[28,42]},{"n":"ANZCRO","l":null,"c":[26]},{"n":"AOT","l":null,"c":[26]},{"n":"ATS Pacific","l":null,"c":[26]},{"n":"Attic Inn","l":null,"c":[26,41]},{"n":"Aubergenie","l":null,"c":[41]},{"n":"bag2bag","l":null,"c":[41]},{"n":"Bakuun","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"beachhuts.com","l":null,"c":[41]},{"n":"Bedandbreakfast.eu","l":null,"c":[41]},{"n":"Beds4Travel","l":null,"c":[26]},{"n":"Bedsonline","l":null,"c":[26]},{"n":"BookaBach","l":null,"c":[41]},{"n":"BookCabin","l":null,"c":[41]},{"n":"Bookeasy","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/592fc0e3-4382-414f-a873-fe6397751604.png","c":[41]},{"n":"Booking.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/bookingcom-logo.png","c":[41]},{"n":"Booking247.com","l":null,"c":[41]},{"n":"Bookingina","l":null,"c":[41]},{"n":"Bookit","l":null,"c":[41]},{"n":"BookMyBooking","l":null,"c":[41]},{"n":"BookNFly","l":null,"c":[41]},{"n":"Bookola","l":null,"c":[41]},{"n":"Bookonlinenow","l":null,"c":[41]},{"n":"bravofly","l":null,"c":[41]},{"n":"Brevistay","l":null,"c":[41]},{"n":"Britain's Finest","l":null,"c":[41]},{"n":"BungalowSpecials","l":null,"c":[41]},{"n":"Busy Rooms","l":null,"c":[41]},{"n":"CheapTickets","l":null,"c":[41]},{"n":"Check24","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/check24-logo.png","c":[41]},{"n":"Cleartrip","l":null,"c":[41]},{"n":"Club Mahindra","l":null,"c":[41]},{"n":"CNBooking","l":null,"c":[26]},{"n":"Columbus.to","l":null,"c":[41]},{"n":"Convergent International","l":null,"c":[26]},{"n":"Ctrip","l":null,"c":[41]},{"n":"Culture Travel","l":null,"c":[41]},{"n":"Darent","l":null,"c":[41]},{"n":"Decolar","l":null,"c":[41]},{"n":"Despegar","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/5497aac5-58cb-4673-9dc0-3513cb38f1a0.png","c":[41]},{"n":"Dida Travel","l":null,"c":[41]},{"n":"dnata","l":null,"c":[26]},{"n":"Dorms.com","l":null,"c":[41]},{"n":"EaseMyTrip","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[41]},{"n":"eBookers","l":null,"c":[41]},{"n":"EdreamsOdigeo","l":null,"c":[41]},{"n":"EET Global","l":null,"c":[26]},{"n":"eLong","l":null,"c":[41]},{"n":"Emerging Travel Group","l":"https://channex.io/images/integrations/etg-logo.svg","c":[41]},{"n":"Emirates Holidays","l":null,"c":[41]},{"n":"Entertainment Book","l":null,"c":[41]},{"n":"Expedia","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/expedia-logo.png","c":[41]},{"n":"Eztravel","l":null,"c":[41]},{"n":"Feratel","l":null,"c":[41]},{"n":"FerienparkSpecials","l":null,"c":[41]},{"n":"Fliggy","l":null,"c":[41]},{"n":"Flight Centre Wholesale","l":null,"c":[26]},{"n":"Flow","l":null,"c":[41]},{"n":"Flycreative","l":null,"c":[41]},{"n":"G2 Travel","l":null,"c":[41]},{"n":"getaroom","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/a008ef7d-2bb3-4f59-a31d-95660d6140e5.png","c":[41]},{"n":"Go Voyages","l":null,"c":[41]},{"n":"Gogo Vacations","l":null,"c":[26]},{"n":"Goibibo","l":null,"c":[41]},{"n":"Goldmedal","l":null,"c":[26]},{"n":"Google","l":null,"c":[27]},{"n":"GoQuo","l":null,"c":[26]},{"n":"Gotifi","l":null,"c":[41]},{"n":"Halalbooking","l":null,"c":[41]},{"n":"HeyTrip","l":null,"c":[41]},{"n":"Hibeds","l":null,"c":[26]},{"n":"Hobse","l":null,"c":[26]},{"n":"Hobse V2","l":null,"c":[41]},{"n":"Holida","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[41]},{"n":"HolidayParkSpecials","l":null,"c":[41]},{"n":"Holidu","l":null,"c":[41]},{"n":"Hoojoozat.com","l":null,"c":[41]},{"n":"Hooroo","l":null,"c":[41]},{"n":"Hopper (Hotel)","l":null,"c":[41]},{"n":"Hostelhunter.com","l":null,"c":[41]},{"n":"Hostelsclub","l":null,"c":[41]},{"n":"HostelWorld","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hostelworld-logo.png","c":[41]},{"n":"Hotel Network","l":null,"c":[28]},{"n":"HotelBeds","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hotelbeds-logo.png","c":[26]},{"n":"Hotelopia","l":null,"c":[41]},{"n":"Hotelrip","l":null,"c":[41]},{"n":"Hotels.com","l":null,"c":[41]},{"n":"Hotelsinone","l":null,"c":[26]},{"n":"Hotelspecials","l":null,"c":[41]},{"n":"HotelTonight","l":null,"c":[41]},{"n":"Hotwire","l":null,"c":[41]},{"n":"HPro Travel","l":null,"c":[26]},{"n":"HRS","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hrs-logo.png","c":[41]},{"n":"Hummingbirdindia","l":null,"c":[26]},{"n":"HyperGuest","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da51353c-aaa9-4fa4-ba27-c0c34f952887.png","c":[26]},{"n":"iBook","l":null,"c":[41]},{"n":"iescape","l":null,"c":[41]},{"n":"Illusions Online","l":null,"c":[41]},{"n":"Infinity Holidays","l":null,"c":[26]},{"n":"IRCTC","l":null,"c":[41]},{"n":"Ixigo","l":null,"c":[41]},{"n":"jetcost","l":null,"c":[41]},{"n":"Jetstar","l":null,"c":[41]},{"n":"JL Tour","l":null,"c":[41]},{"n":"JOMhotel","l":null,"c":[41]},{"n":"Karpaten","l":null,"c":[26]},{"n":"Keytel","l":null,"c":[26]},{"n":"Klook","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/klook-logo.png","c":[41]},{"n":"Koob","l":null,"c":[41]},{"n":"lastminute.com","l":null,"c":[41]},{"n":"LetsGoa","l":null,"c":[41]},{"n":"Lido / AADX","l":null,"c":[28]},{"n":"Lido / AADX","l":null,"c":[28]},{"n":"Little Travel Group","l":null,"c":[41]},{"n":"Luxenomad","l":null,"c":[41]},{"n":"MakeMyTrip","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/7ad7313e-823b-4d7b-81ef-2c6ff7dde322.png","c":[41]},{"n":"Meituan","l":null,"c":[41]},{"n":"MG Bedbank","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mg-bedbank-logo.png","c":[26]},{"n":"Miki Travel","l":null,"c":[26]},{"n":"MitchellCorp","l":null,"c":[26]},{"n":"Monasteries.com","l":null,"c":[41]},{"n":"Mr ' Mrs Smith","l":null,"c":[41]},{"n":"My Travel Bazaar","l":null,"c":[41]},{"n":"Myholiday Trip","l":null,"c":[41]},{"n":"myhotelbreak","l":null,"c":[41]},{"n":"not1night","l":null,"c":[41]},{"n":"Nuitee","l":null,"c":[41]},{"n":"Odeon","l":null,"c":[41]},{"n":"Odigeo","l":null,"c":[41]},{"n":"Offpeakluxury","l":null,"c":[41]},{"n":"Onefinerate.com","l":null,"c":[26]},{"n":"Online Vacations","l":null,"c":[26]},{"n":"Opodo","l":null,"c":[41]},{"n":"Orbitz","l":null,"c":[41]},{"n":"Ostrovok B2B","l":null,"c":[41]},{"n":"OTS Global","l":null,"c":[26]},{"n":"Ottila International","l":null,"c":[41]},{"n":"Pacific Bedbank","l":null,"c":[41]},{"n":"Pan Pacific","l":null,"c":[41]},{"n":"Pan Pacific Travel","l":null,"c":[26]},{"n":"Pegasus","l":null,"c":[28,42]},{"n":"PerfectStay","l":null,"c":[41]},{"n":"Pink Elephant International","l":null,"c":[41]},{"n":"Pitchup","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/82d1b7f7-d608-45d1-8f33-80c1ca408e78.png","c":[41]},{"n":"Plusgrade","l":null,"c":[41]},{"n":"Qantas","l":null,"c":[41]},{"n":"Qiyouji","l":null,"c":[41]},{"n":"Rakuten Travel","l":null,"c":[41]},{"n":"Ratehawk","l":null,"c":[41]},{"n":"Rateping","l":null,"c":[41]},{"n":"Rebranded Hpro","l":null,"c":[26]},{"n":"Reconline","l":null,"c":[28]},{"n":"Rehlat","l":null,"c":[41]},{"n":"Restel Travel","l":null,"c":[26]},{"n":"RezLive","l":null,"c":[26]},{"n":"Riya Holidays Pvt Ltd","l":null,"c":[26]},{"n":"Robinhood Travel","l":null,"c":[41]},{"n":"Roibos","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da970051-848f-499c-a8cc-2c650fae0caf.png","c":[41]},{"n":"Rovitravel","l":null,"c":[26]},{"n":"Rumbo","l":null,"c":[41]},{"n":"Sabre","l":null,"c":[28,42]},{"n":"Scapia","l":null,"c":[41]},{"n":"Secret Retreats","l":null,"c":[41]},{"n":"Senetic Booking Engine","l":null,"c":[26]},{"n":"SilverDoor Apartments","l":null,"c":[41]},{"n":"Spabreaks","l":null,"c":[41]},{"n":"SpeedyBooker","l":null,"c":[41]},{"n":"STAAH GDS","l":null,"c":[28]},{"n":"Stay Bonanza","l":null,"c":[26]},{"n":"STAYKSA","l":null,"c":[41]},{"n":"Stayz","l":null,"c":[41]},{"n":"Sunlover Holidays","l":null,"c":[26]},{"n":"TabletHotels","l":null,"c":[41]},{"n":"TBO Holidays","l":null,"c":[26]},{"n":"Territory Discoveries","l":null,"c":[26]},{"n":"The Percentage App","l":"https://www.staah.com/wp-content/uploads/2023/09/Abode_Logo_positive-1-e1723594518146-150x150.png","c":[41]},{"n":"Tiket.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tiket-logo.webp","c":[41]},{"n":"tobook.com","l":null,"c":[41]},{"n":"TOMAS","l":null,"c":[41]},{"n":"Tourmind","l":null,"c":[41]},{"n":"Tourplan","l":null,"c":[26]},{"n":"Travcal","l":null,"c":[41]},{"n":"Travclan","l":null,"c":[41]},{"n":"Travco","l":null,"c":[26]},{"n":"Travel Republic","l":null,"c":[41]},{"n":"TravelBag","l":null,"c":[26]},{"n":"Travelbox","l":null,"c":[41]},{"n":"TravelBullz","l":null,"c":[41]},{"n":"TravelEssence / Little Travel Group","l":null,"c":[41]},{"n":"Travelguru","l":null,"c":[41]},{"n":"Travellink","l":null,"c":[41]},{"n":"Travelocity","l":null,"c":[41]},{"n":"Traveloka","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/traveloka-logo.png","c":[41]},{"n":"TravelplusApp","l":null,"c":[41]},{"n":"Travelport","l":null,"c":[28]},{"n":"TravelStay","l":null,"c":[41]},{"n":"Travex Connect","l":null,"c":[26,41]},{"n":"Trip Factory","l":null,"c":[41]},{"n":"Trip.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tripcom-logo.png","c":[41]},{"n":"TripAdvisor","l":null,"c":[27]},{"n":"TripGain","l":null,"c":[26,41]},{"n":"Tripjack","l":null,"c":[41]},{"n":"Tripmartz","l":null,"c":[26]},{"n":"Tripmax","l":null,"c":[41]},{"n":"Trivago","l":null,"c":[27]},{"n":"TrustedStays","l":null,"c":[41]},{"n":"TWS4Hotels.com","l":null,"c":[26]},{"n":"Tytlees","l":null,"c":[26]},{"n":"UniversityRooms","l":null,"c":[41]},{"n":"Vacanceselect Travel","l":null,"c":[41]},{"n":"Vernost","l":null,"c":[41]},{"n":"via.com","l":null,"c":[41]},{"n":"villa-finder","l":null,"c":[41]},{"n":"volagratis","l":null,"c":[41]},{"n":"Voyaah","l":null,"c":[41]},{"n":"VRBO","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/vrbo-logo.png","c":[41]},{"n":"WebBeds ' Destinations of the World","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' Fitruums","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' Lots Of Hotels","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' SunHotels","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' TotalStay","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"weg.de","l":null,"c":[41]},{"n":"Withinearth","l":null,"c":[41]},{"n":"World-Blue","l":null,"c":[41]},{"n":"Wotif","l":null,"c":[41]},{"n":"Wowcher","l":null,"c":[41]},{"n":"Xendit","l":null,"c":[41]},{"n":"XML WORLD","l":null,"c":[26]},{"n":"Yalago","l":null,"c":[26]},{"n":"Yatra","l":null,"c":[41]},{"n":"Yuktravel","l":null,"c":[41]},{"n":"Zenhotels","l":null,"c":[41]},{"n":"Zuba","l":null,"c":[41]}]}};
+
 var TERMS={
-  m:{label:'Monthly',months:1,obDisc:0,short:'/month'},
-  q:{label:'Quarterly',months:3,obDisc:.25,short:'/quarter'},
-  h:{label:'Half-yearly',months:6,obDisc:.5,short:'/6 months'},
-  y:{label:'Yearly',months:12,obDisc:1,short:'/year'}
+  m:{label:'Monthly',months:1,short:'/month',word:'Then every month'},
+  q:{label:'Quarterly',months:3,short:'/quarter',word:'Then every 3 months'},
+  h:{label:'Half-yearly',months:6,short:'/6 months',word:'Then every 6 months'},
+  y:{label:'Yearly',months:12,short:'/year',word:'Then every year'}
 };
 var PLANS={
-  homestay:{label:'Homestay',forWho:'Homestays and villas. One unit, unlimited keys inside it.',
-    prices:{m:1299,q:3699,h:6499,y:10999},incUnits:1,extraPm:500,unitWord:'unit',defCount:1,
-    feats:[['✓','Everything to run your homestay'],['✓','1 unit — unlimited keys, one price'],['✓','Extra listings ₹500/unit/mo'],['✓','Booking engine + WhatsApp'],['+','Basic Channel Manager as add-on <button class="dir-link" onclick="event.stopPropagation();openDir(\'basic\')">view OTAs</button>']]},
-  basic:{label:'Basic',forWho:'Hotels that want the full PMS without OTA sync costs.',
+  basic:{label:'Basic',tag:'The full PMS at the simplest price. Add OTA sync when you want it.',
     prices:{m:1599,q:4499,h:7999,y:12999},incUnits:15,extraPm:50,unitWord:'room',featured:true,defCount:12,
-    feats:[['✓','Full PMS — front desk to folio'],['✓','15 rooms included, ₹50/room after'],['✓','Add as many rooms as you want'],['✓','Booking engine + Digi AI + BI'],['✓','Dedicated relationship manager'],['+','Basic Channel Manager as add-on <button class="dir-link" onclick="event.stopPropagation();openDir(\'basic\')">view OTAs</button>']]},
-  advance:{label:'Advance',forWho:'OTA-driven hotels that live on rate sync and revenue.',
+    runits:'15 rooms included · ₹50/room/mo after · unlimited rooms'},
+  advance:{label:'Advance',tag:'For OTA-driven hotels — advanced channel sync, Google and revenue tools built in.',
     prices:{m:3499,q:9999,h:17999,y:32999},incUnits:15,extraPm:150,unitWord:'room',defCount:12,
-    feats:[['✓','Everything in Basic'],['✓','Advanced Channel Manager built in <button class="dir-link" onclick="event.stopPropagation();openDir(\'adv\')">view all</button>'],['✓','Google Hotel ARI + RMS tool'],['✓','Form C + smart check-in included'],['✓','15 rooms included, ₹150/room after']]}
+    runits:'15 rooms included · ₹150/room/mo after'},
+  homestay:{label:'Homestay',tag:'For homestays & villas — priced by the listing, not the room.',
+    prices:{m:1299,q:3699,h:6499,y:10999},incUnits:1,extraPm:500,unitWord:'unit',defCount:1,hs:true,
+    runits:'1 unit, unlimited keys · ₹500/unit/mo per extra listing'}
 };
+var FEATURES=[
+  {n:'Rooms / units included',v:{basic:'15 + ₹50/room',advance:'15 + ₹150/room',homestay:'1 unit + ₹500'}},
+  {n:'Front desk, billing, ledger, reports',v:{basic:'y',advance:'y',homestay:'y'}},
+  {n:'Booking engine + WhatsApp',v:{basic:'y',advance:'y',homestay:'y'}},
+  {n:'Digi AI + BI dashboard',v:{basic:'y',advance:'y',homestay:'y'}},
+  {n:'Channel manager (OTA sync)',dir:true,v:{basic:'a',advance:'Advanced ✓',homestay:'a'}},
+  {n:'Google Hotel ARI',v:{basic:'n',advance:'y',homestay:'n'}},
+  {n:'Revenue tool + Form C + smart check-in',v:{basic:'a',advance:'y',homestay:'a'}},
+  {n:'Dedicated relationship manager',v:{basic:'y',advance:'y',homestay:'y'}}
+];
 var GROUPS=[
   {id:'cm',type:'check',title:'Basic Channel Manager',sub:'Live rate & availability sync for all your rooms. <button class="dir-link" onclick="openDir(\'basic\')">View OTA integrations →</button>',
    titleAdv:'Advanced Channel Manager',subAdv:'2,000+ channels &amp; partners — OTAs, GDS, wholesalers, metasearch — synced for all your rooms. <button class="dir-link" onclick="openDir(\'adv\')">View all integrations →</button>',
@@ -447,6 +418,13 @@ var GROUPS=[
           {id:'rms',name:'RMS — dynamic pricing tool',desc:'Rules-based rate recommendations',pm:1000,incAdv:true},
           {id:'tally',name:'Tally integration',desc:'Daily posting into your Tally books',pm:1000}]}
 ];
+var KIT_TYPES=[
+  {id:'self',name:'Self check-in QR codes'},
+  {id:'ird',name:'Room dining QR codes'},
+  {id:'table',name:'Table QR codes'}
+];
+var KIT_RATES={std:{label:'Standard',perQr:200},co:{label:'Co-branded',perQr:300},custom:{label:'Custom-branded',perQr:400}};
+var OTA_LISTING=2000;
 var ONETIME=[
   {id:'reach',name:'Essential Reach — 3-OTA optimization',price:4999},
   {id:'b5',name:'5-OTA bundle + Google listing',price:10999},
@@ -455,166 +433,120 @@ var ONETIME=[
   {id:'web',name:'Property website',price:10000}
 ];
 var ONBOARD=4999;
-var KIT_RATES={std:{label:'Standard',perQr:200},co:{label:'Co-branded',perQr:300},custom:{label:'Custom-branded',perQr:400}};
-var OTA_LISTING=2000;
 var COUPONS={q:{code:'QUARTER25',off:0.25,label:'25% off onboarding'},h:{code:'HALF50',off:0.5,label:'50% off onboarding'},y:{code:'ANNUALFREE',off:1,label:'onboarding completely free'}};
-var KIT_TYPES=[
-  {id:'self',name:'Self check-in QR codes'},
-  {id:'ird',name:'Room dining QR codes'},
-  {id:'table',name:'Table QR codes'}
-];
-var state={term:'y',plan:'basic',counts:{homestay:1,basic:12,advance:12},checks:{},radios:{fnb:'fnb-none',invg:'inv-none'},onetime:{},otaQty:0,coupon:null,
+var TERM_NAMES={q:'quarterly',h:'half-yearly',y:'yearly'};
+var state={step:1,term:'y',plan:'basic',counts:{homestay:1,basic:12,advance:12},checks:{},radios:{fnb:'fnb-none',invg:'inv-none'},onetime:{},otaQty:0,coupon:null,
   kit:{branding:'std',qty:{self:0,ird:0,table:0}}};
 function cnt(){return state.counts[state.plan];}
 function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
 function pmOf(item){return typeof item.pm==='object'?item.pm[state.term]:item.pm;}
 
-function renderCards(){
-  var t=TERMS[state.term],host=document.getElementById('plan-cards'),html='';
-  ['basic','advance'].forEach(function(k){
-    var p=PLANS[k],pr=p.prices[state.term];
-    var eff=t.months>1?inr(pr/t.months)+'/mo effective':'&nbsp;';
-    var rule='<div class="room-rule per">'+(k==='homestay'
-      ?'1 unit, unlimited keys · '+inr(p.extraPm)+'/unit/mo per extra listing'
-      :'Includes 15 rooms · '+inr(p.extraPm)+'/room/mo after')+'</div>';
-    var feats=p.feats.map(function(f){
-      var mut=f[0]==='+';
-      var ic=mut?'<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v8M2 6h8" stroke="#9E9E9E" stroke-width="1.6" stroke-linecap="round"/></svg>'
-               :'<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.6 2.6L10 3.5" stroke="#1B5E20" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      return '<li'+(mut?' class="mut"':'')+'>'+ic+f[1]+'</li>';
-    }).join('');
-    html+='<div class="plan'+(p.featured?' featured':'')+'">'
-      +(p.featured?'<span class="badge-pop">Most popular</span>':'')
-      +'<h3>'+p.label+'</h3><p class="for">'+p.forWho+'</p>'
-      +'<div class="price"><span class="amt">'+inr(pr)+'</span> <span class="per">'+t.short+'</span></div>'
-      +'<p class="eff">'+eff+'</p>'+rule+'<ul>'+feats+'</ul>'
-      +'<button class="cta" onclick="pickPlan(\''+k+'\')">Choose '+p.label+'</button></div>';
+/* ---------- pricing math (single source of truth) ---------- */
+function quote(){
+  var p=PLANS[state.plan],t=TERMS[state.term],months=t.months,n=cnt();
+  var sub=p.prices[state.term];
+  var extraN=Math.max(0,n-p.incUnits),extra=extraN*p.extraPm*months;
+  var lines=[{l:p.label+' plan <small>'+t.label+' billing · '+p.incUnits+' '+p.unitWord+(p.incUnits>1?'s':'')+' included</small>',v:inr(sub)}];
+  if(extra>0)lines.push({l:'Extra '+p.unitWord+'s ×'+extraN,v:inr(extra)});
+  var addTotal=0;
+  GROUPS.forEach(function(g){
+    if(g.includedIn&&g.includedIn.indexOf(state.plan)>=0)return;
+    g.items.forEach(function(it){
+      if(it.incAdv&&state.plan==='advance')return;
+      var on=g.type==='radio'?state.radios[g.id]===it.id:!!state.checks[it.id];
+      var pm=pmOf(it);
+      if(on&&pm>0){addTotal+=pm*months;lines.push({l:it.name,v:inr(pm*months)});}
+    });
+  });
+  lines.push({l:'Onboarding <small>one-time</small>',v:inr(ONBOARD)});
+  var rate=KIT_RATES[state.kit.branding],kitTotal=0;
+  KIT_TYPES.forEach(function(it){
+    var q=state.kit.qty[it.id];
+    if(q>0){var v=q*rate.perQr;kitTotal+=v;lines.push({l:it.name+' ×'+q+' <small>'+rate.label+' · one-time</small>',v:inr(v)});}
+  });
+  var otTotal=0;
+  if(state.otaQty>0){var otaV=state.otaQty*OTA_LISTING;otTotal+=otaV;lines.push({l:'Fresh OTA listings ×'+state.otaQty+' <small>one-time</small>',v:inr(otaV)});}
+  ONETIME.forEach(function(o){if(state.onetime[o.id]){otTotal+=o.price;lines.push({l:o.name+' <small>one-time</small>',v:inr(o.price)});}});
+  var c=COUPONS[state.term];
+  if(state.coupon&&(!c||c.code!==state.coupon))state.coupon=null;
+  var couponDisc=state.coupon&&c?Math.round(ONBOARD*c.off):0;
+  var ob=ONBOARD-couponDisc;
+  var pre=sub+extra+addTotal+ob+kitTotal+otTotal;
+  var renew=sub+extra+addTotal;
+  return {p:p,t:t,months:months,n:n,lines:lines,couponDisc:couponDisc,once:ob+kitTotal+otTotal,
+    gst:pre*0.18,today:pre*1.18,renew:renew*1.18};
+}
+
+/* ---------- step 1: plans ---------- */
+function renderPlans(){
+  var host=document.getElementById('pcards'),html='';
+  ['basic','advance','homestay'].forEach(function(k){
+    var p=PLANS[k],sel=state.plan===k;
+    html+='<div class="pcard'+(p.hs?' hs':'')+(sel?' sel':'')+'" data-p="'+k+'" role="button" tabindex="0" aria-pressed="'+sel+'">'
+      +'<span class="tick" aria-hidden="true"></span>'
+      +(p.featured?'<span class="pop">Most popular</span>':(p.hs?'<span class="hsb">Homestays &amp; villas</span>':'<span style="display:inline-block;height:18px;margin-bottom:8px;"></span>'))
+      +'<h3>'+p.label+'</h3><p class="tag">'+p.tag+'</p>'
+      +'<p class="from"><strong>'+inr(p.prices.y/12)+'</strong>/mo <span style="font-size:11.5px;">billed yearly · '+inr(p.prices.m)+'/mo monthly</span></p>'
+      +'<p class="runits">'+p.runits+'</p></div>';
   });
   host.innerHTML=html;
-  var hp=PLANS.homestay,hpr=hp.prices[state.term];
-  document.getElementById('homestay-strip').innerHTML=
-    '<div class="hs-card">'
-    +'<div><span class="hs-badge">Not a hotel? Homestays &amp; villas</span>'
-    +'<h3>Homestay</h3><p class="hs-desc">'+hp.forWho+'</p>'
-    +'<p class="hs-desc" style="margin-top:6px;">A different kind of property, priced a different way — by the listing, not the room.</p></div>'
-    +'<ul class="hs-feats"><li>Everything to run your homestay</li><li>1 unit — unlimited keys, one price</li><li>Extra listings ₹500/unit/mo</li><li>Basic Channel Manager add-on <button class="dir-link" onclick="openDir(\'basic\')">view OTAs</button></li></ul>'
-    +'<div class="hs-buy"><p class="hs-price">'+inr(hpr)+'<span class="per"> '+t.short+'</span></p>'
-    +(t.months>1?'<p class="hs-eff">'+inr(hpr/t.months)+'/mo effective</p>':'<p class="hs-eff">&nbsp;</p>')
-    +'<button class="hs-cta" onclick="pickPlan(\'homestay\')">Choose Homestay</button></div>'
-    +'</div>';
-  var hc=COUPONS[state.term];
-  document.getElementById('ob-strip').innerHTML=
-    'One-time onboarding ₹4,999'+(hc?' — <strong>coupon '+hc.code+'</strong> available at checkout ('+hc.label+')':' · coupon codes available on longer billing terms');
+  host.querySelectorAll('.pcard').forEach(function(c){
+    function pick(){state.plan=c.dataset.p;renderPlans();renderFtable();syncBar();}
+    c.addEventListener('click',pick);
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+  });
 }
-
-function renderPills(){
-  document.getElementById('co-title').textContent='Configure DigiStay '+PLANS[state.plan].label;
-  document.getElementById('co-terms').innerHTML=Object.keys(TERMS).map(function(k){
-    return '<button class="pill'+(state.term===k?' on':'')+'" onclick="setTerm(\''+k+'\')">'+TERMS[k].label+'</button>';
-  }).join('');
-}
-
-function renderAddons(){
-  var host=document.getElementById('addon-area'),html='';
-  GROUPS.forEach(function(g){
-    var included=g.includedIn&&g.includedIn.indexOf(state.plan)>=0;
-    var title=(included&&g.titleAdv)?g.titleAdv:g.title;
-    var sub=(included&&g.subAdv)?g.subAdv:g.sub;
-    html+='<div class="grp"><p class="g-title">'+title+(included?' <span class="inc-tag">Included in Advance</span>':'')+'</p>'
-      +(sub?'<p class="g-sub">'+sub+'</p>':'');
-    if(!included){
-      g.items.forEach(function(it){
-        var incAdv=it.incAdv&&state.plan==='advance';
-        var checked=g.type==='radio'?state.radios[g.id]===it.id:!!state.checks[it.id];
-        var price=pmOf(it);
-        var priceHtml=incAdv?'<span class="inc-tag">Included</span>':(price?'<span class="o-price">'+inr(price)+'/mo</span>':'<span class="o-price" style="color:var(--b400)">₹0</span>');
-        html+='<label class="opt'+(checked&&!incAdv?' on':'')+(incAdv?' disab':'')+'">'
-          +'<input type="'+(g.type==='radio'?'radio':'checkbox')+'" name="'+g.id+'" data-g="'+g.id+'" data-i="'+it.id+'"'
-          +(checked&&!incAdv?' checked':'')+(incAdv?' disabled':'')+'>'
-          +'<span class="o-name">'+it.name+(it.desc?'<span class="o-desc">'+it.desc+'</span>':'')+'</span>'
-          +priceHtml+(it.save&&!incAdv?'<span class="o-save">'+it.save+'</span>':'')+'</label>';
-      });
-    }
+function renderFtable(){
+  var host=document.getElementById('ftable'),order=['basic','advance','homestay'];
+  var html='<div class="frow head"><div>What you get</div>';
+  order.forEach(function(k){html+='<div class="fcell'+(state.plan===k?' selcol':'')+'">'+PLANS[k].label+'</div>';});
+  html+='</div>';
+  FEATURES.forEach(function(f){
+    html+='<div class="frow"><div>'+f.n+(f.dir?' <button class="flink" onclick="openDir(state.plan===\'advance\'?\'adv\':\'basic\')">view</button>':'')+'</div>';
+    order.forEach(function(k){
+      var v=f.v[k],cell;
+      if(v==='y')cell='<span class="fy">✓</span>';
+      else if(v==='n')cell='<span class="fn">—</span>';
+      else if(v==='a')cell='<span class="fa">Add-on</span>';
+      else cell=v;
+      html+='<div class="fcell'+(state.plan===k?' selcol':'')+'">'+cell+'</div>';
+    });
     html+='</div>';
   });
   host.innerHTML=html;
-  host.querySelectorAll('input').forEach(function(inp){
-    inp.addEventListener('change',function(){
-      var g=this.dataset.g,i=this.dataset.i;
-      var grp=GROUPS.filter(function(x){return x.id===g;})[0];
-      if(grp.type==='radio'){state.radios[g]=i;}else{state.checks[i]=this.checked;}
-      renderAddons();renderRooms();renderSummary();
-    });
-  });
-  var oh=document.getElementById('onetime-area');
-  var otaHtml='<div class="kit-row" style="border-bottom:1px solid var(--border);">'
-    +'<span class="k-name">Fresh OTA listings<span class="o-desc" style="display:block;font-weight:400;color:var(--text-muted);">'+inr(OTA_LISTING)+' per OTA — pick how many OTAs to list on</span></span>'
-    +'<span class="stepper" style="height:34px;"><button type="button" class="k-b" data-ota="-1" aria-label="Fewer OTA listings" style="width:32px;height:32px;">−</button>'
-    +'<input type="number" min="0" max="30" value="'+state.otaQty+'" id="ota-qty" inputmode="numeric" aria-label="Number of OTA listings" style="width:56px;height:32px;">'
-    +'<button type="button" class="k-b" data-ota="1" aria-label="More OTA listings" style="width:32px;height:32px;">+</button></span>'
-    +'<span class="k-amt">'+(state.otaQty>0?inr(state.otaQty*OTA_LISTING):'—')+'</span></div>';
-  oh.innerHTML=otaHtml+ONETIME.map(function(o){
-    return '<label class="opt'+(state.onetime[o.id]?' on':'')+'"><input type="checkbox" data-ot="'+o.id+'"'+(state.onetime[o.id]?' checked':'')+'>'
-      +'<span class="o-name">'+o.name+'</span><span class="o-price">'+inr(o.price)+' once</span></label>';
-  }).join('');
-  oh.querySelectorAll('input[data-ot]').forEach(function(inp){
-    inp.addEventListener('change',function(){state.onetime[this.dataset.ot]=this.checked;renderAddons();renderSummary();});
-  });
-  oh.querySelectorAll('.k-b[data-ota]').forEach(function(b){
-    b.addEventListener('click',function(){state.otaQty=Math.min(30,Math.max(0,state.otaQty+parseInt(this.dataset.ota,10)));renderAddons();renderSummary();});
-  });
-  oh.querySelector('#ota-qty').addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.otaQty=Math.min(30,Math.max(0,v));
-    this.closest('.kit-row').querySelector('.k-amt').textContent=state.otaQty>0?inr(state.otaQty*OTA_LISTING):'—';renderSummary();}});
 }
 
-function kitQty(){return state.kit.qty.self+state.kit.qty.ird+state.kit.qty.table;}
-function renderKit(){
-  var host=document.getElementById('kit-area'),rate=KIT_RATES[state.kit.branding].perQr;
-  var html='<p class="g-title">Setup kit — printed QR codes</p>'
-    +'<p class="g-sub">Choose your branding first — it sets the price per QR. One-time, delivered at onboarding.</p>'
-    +'<div class="pills" style="margin-bottom:14px;">';
-  Object.keys(KIT_RATES).forEach(function(k){
-    html+='<button type="button" class="pill'+(state.kit.branding===k?' on':'')+'" data-brand="'+k+'">'+KIT_RATES[k].label+' · '+inr(KIT_RATES[k].perQr)+'/QR</button>';
+/* ---------- step 2: terms ---------- */
+function renderTerms(){
+  var p=PLANS[state.plan];
+  document.getElementById('term-lead').textContent='DigiStay '+p.label+' — longer terms cost less per month, and unlock onboarding coupons.';
+  var host=document.getElementById('tcards'),html='';
+  ['y','h','q','m'].forEach(function(k){
+    var t=TERMS[k],pr=p.prices[k],pm=pr/t.months,c=COUPONS[k];
+    html+='<div class="tcard'+(state.term===k?' sel':'')+'" data-t="'+k+'" role="button" tabindex="0">'
+      +'<span class="radio" aria-hidden="true"></span>'
+      +'<span class="t-main"><span class="t-name">'+t.label
+      +(k==='y'?'<span class="badge best">BEST VALUE · onboarding-free coupon</span>':'')
+      +'</span><span class="t-note" style="display:block;">'+(c?'Coupon '+c.code+' — '+c.label:'Full onboarding fee applies')+'</span></span>'
+      +'<span class="t-price"><span class="t-pm" style="display:block;">'+inr(pm)+'<span>/mo</span></span>'
+      +'<span class="t-billed">'+(t.months>1?inr(pr)+' billed '+t.label.toLowerCase():'billed monthly')+'</span></span></div>';
   });
-  html+='</div><p class="g-sub">Now enter how many of each you need — at '+inr(rate)+' per QR.</p>';
-  KIT_TYPES.forEach(function(it){
-    var q=state.kit.qty[it.id];
-    html+='<div class="kit-row">'
-      +'<span class="k-name">'+it.name+'</span>'
-      +'<span class="stepper" style="height:34px;"><button type="button" class="k-b" data-kq="'+it.id+'" data-d="-1" aria-label="Fewer '+it.name+'" style="width:32px;height:32px;">−</button>'
-      +'<input type="number" min="0" max="500" value="'+q+'" data-kin="'+it.id+'" inputmode="numeric" aria-label="'+it.name+' quantity" style="width:56px;height:32px;">'
-      +'<button type="button" class="k-b" data-kq="'+it.id+'" data-d="1" aria-label="More '+it.name+'" style="width:32px;height:32px;">+</button></span>'
-      +'<span class="k-amt">'+(q>0?inr(q*rate):'—')+'</span></div>';
-  });
-  var tq=kitQty();
-  html+='<div class="kit-total"><span>Kit total'+(tq>0?' — '+tq+' QRs × '+inr(rate):'')+'</span><span>'+(tq>0?inr(tq*rate):'₹0')+'</span></div>';
   host.innerHTML=html;
-  host.querySelectorAll('.k-b').forEach(function(b){
-    b.addEventListener('click',function(){var id=this.dataset.kq;state.kit.qty[id]=Math.min(500,Math.max(0,state.kit.qty[id]+parseInt(this.dataset.d,10)));renderKit();renderSummary();});
+  host.querySelectorAll('.tcard').forEach(function(c){
+    function pick(){state.term=c.dataset.t;renderTerms();syncBar();}
+    c.addEventListener('click',pick);
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
   });
-  host.querySelectorAll('input[data-kin]').forEach(function(inp){
-    inp.addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.kit.qty[this.dataset.kin]=Math.min(500,Math.max(0,v));
-      var row=this.closest('.kit-row');row.querySelector('.k-amt').textContent=state.kit.qty[this.dataset.kin]>0?inr(state.kit.qty[this.dataset.kin]*KIT_RATES[state.kit.branding].perQr):'—';
-      var tq=kitQty(),r=KIT_RATES[state.kit.branding].perQr;
-      host.querySelector('.kit-total').innerHTML='<span>Kit total'+(tq>0?' — '+tq+' QRs × '+inr(r):'')+'</span><span>'+(tq>0?inr(tq*r):'₹0')+'</span>';
-      renderSummary();}});
-  });
-  host.querySelectorAll('[data-brand]').forEach(function(b){
-    b.addEventListener('click',function(){state.kit.branding=this.dataset.brand;renderKit();renderSummary();});
-  });
+  document.getElementById('ob-note').textContent='One-time onboarding ₹4,999 applies to every plan — apply your coupon at the review step.';
 }
-function kitLines(){
-  var rate=KIT_RATES[state.kit.branding],out=[],total=0;
-  KIT_TYPES.forEach(function(it){
-    var q=state.kit.qty[it.id];
-    if(q>0){var v=q*rate.perQr;total+=v;out.push({l:it.name+' ×'+q+' <small>'+rate.label+' · one-time</small>',v:inr(v)});}
-  });
-  return {lines:out,total:total};
-}
+
+/* ---------- step 3: rooms ---------- */
 function renderRooms(){
   var p=PLANS[state.plan],t=TERMS[state.term],n=cnt();
-  document.getElementById('rooms-title').textContent=state.plan==='homestay'?'How many units (listings)?':'How many rooms?';
-  document.getElementById('rooms-label').textContent=state.plan==='homestay'?'Separate listings — keys inside one unit don’t count':'Rooms at your property';
+  document.getElementById('rooms-title').textContent=state.plan==='homestay'?'How many units (listings) do you have?':'How many rooms do you have?';
+  document.getElementById('rooms-lead').textContent=state.plan==='homestay'
+    ?'Keys inside one unit don’t count — one listing is one unit.'
+    :'Your first 15 rooms are included in the plan price.';
   document.getElementById('rooms').value=n;
   var note=document.getElementById('room-note');
   var extra=Math.max(0,n-p.incUnits);
@@ -630,33 +562,109 @@ function renderRooms(){
       :'All '+n+' rooms covered by the included 15.';
   }
 }
+function bump(d){state.counts[state.plan]=Math.min(200,Math.max(1,cnt()+d));renderRooms();syncBar();}
+document.getElementById('rooms').addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.counts[state.plan]=Math.min(200,Math.max(1,v));renderRooms();syncBar();}});
 
-function renderSummary(){
-  var p=PLANS[state.plan],t=TERMS[state.term],months=t.months,n=cnt();
-  var sub=p.prices[state.term];
-  var extraN=Math.max(0,n-p.incUnits);
-  var extra=extraN*p.extraPm*months;
-  var lines=[{l:p.label+' plan <small>'+t.label+' billing · '+p.incUnits+' '+p.unitWord+(p.incUnits>1?'s':'')+' included</small>',v:inr(sub)}];
-  if(extra>0)lines.push({l:'Extra '+p.unitWord+'s ×'+extraN,v:inr(extra)});
-  var addTotal=0;
-  GROUPS.forEach(function(g){
-    if(g.includedIn&&g.includedIn.indexOf(state.plan)>=0)return;
-    g.items.forEach(function(it){
-      if(it.incAdv&&state.plan==='advance')return;
-      var on=g.type==='radio'?state.radios[g.id]===it.id:!!state.checks[it.id];
-      var pm=pmOf(it);
-      if(on&&pm>0){addTotal+=pm*months;lines.push({l:it.name,v:inr(pm*months)});}
+/* ---------- step 4: extras ---------- */
+function renderAddons(){
+  var host=document.getElementById('addon-area'),html='';
+  GROUPS.forEach(function(g,gi){
+    var included=g.includedIn&&g.includedIn.indexOf(state.plan)>=0;
+    var title=(included&&g.titleAdv)?g.titleAdv:g.title;
+    var sub=(included&&g.subAdv)?g.subAdv:g.sub;
+    html+=(gi>0?'<div style="border-top:1px solid var(--border);margin:16px 0 12px;"></div>':'')
+      +'<p class="x-title">'+title+(included?' <span class="inc-tag">Included in Advance</span>':'')+'</p>'
+      +(sub?'<p class="x-sub">'+sub+'</p>':'');
+    if(!included){
+      g.items.forEach(function(it){
+        var incAdv=it.incAdv&&state.plan==='advance';
+        var checked=g.type==='radio'?state.radios[g.id]===it.id:!!state.checks[it.id];
+        var price=pmOf(it);
+        var priceHtml=incAdv?'<span class="inc-tag">Included</span>':(price?'<span class="o-price">'+inr(price)+'/mo</span>':'<span class="o-price" style="color:var(--b400)">₹0</span>');
+        html+='<label class="opt'+(checked&&!incAdv?' on':'')+'"'+(incAdv?' style="opacity:.55;cursor:default;"':'')+'>'
+          +'<input type="'+(g.type==='radio'?'radio':'checkbox')+'" name="'+g.id+'" data-g="'+g.id+'" data-i="'+it.id+'"'
+          +(checked&&!incAdv?' checked':'')+(incAdv?' disabled':'')+'>'
+          +'<span class="o-name">'+it.name+(it.desc?'<span class="o-desc">'+it.desc+'</span>':'')+'</span>'
+          +priceHtml+(it.save&&!incAdv?'<span class="o-save">'+it.save+'</span>':'')+'</label>';
+      });
+    }
+  });
+  host.innerHTML=html;
+  host.querySelectorAll('input').forEach(function(inp){
+    inp.addEventListener('change',function(){
+      var g=this.dataset.g,i=this.dataset.i;
+      var grp=GROUPS.filter(function(x){return x.id===g;})[0];
+      if(grp.type==='radio'){state.radios[g]=i;}else{state.checks[i]=this.checked;}
+      renderAddons();syncBar();
     });
   });
-  lines.push({l:'Onboarding <small>one-time</small>',v:inr(ONBOARD)});
-  var kit=kitLines();
-  kit.lines.forEach(function(x){lines.push(x);});
-  var otTotal=0;
-  if(state.otaQty>0){var otaV=state.otaQty*OTA_LISTING;otTotal+=otaV;lines.push({l:'Fresh OTA listings ×'+state.otaQty+' <small>one-time</small>',v:inr(otaV)});}
-  ONETIME.forEach(function(o){if(state.onetime[o.id]){otTotal+=o.price;lines.push({l:o.name+' <small>one-time</small>',v:inr(o.price)});}});
+  renderOnetime();
+}
+function kitQty(){return state.kit.qty.self+state.kit.qty.ird+state.kit.qty.table;}
+function renderKit(){
+  var host=document.getElementById('kit-area'),rate=KIT_RATES[state.kit.branding].perQr;
+  var html='<p class="x-title">Setup kit — printed QR codes</p>'
+    +'<p class="x-sub">Choose your branding first — it sets the price per QR. One-time, delivered at onboarding.</p>'
+    +'<div class="pills" style="margin-bottom:12px;">';
+  Object.keys(KIT_RATES).forEach(function(k){
+    html+='<button type="button" class="pill'+(state.kit.branding===k?' on':'')+'" data-brand="'+k+'">'+KIT_RATES[k].label+' · '+inr(KIT_RATES[k].perQr)+'/QR</button>';
+  });
+  html+='</div><p class="x-sub">Now enter how many of each you need — at '+inr(rate)+' per QR.</p>';
+  KIT_TYPES.forEach(function(it){
+    var q=state.kit.qty[it.id];
+    html+='<div class="kit-row"><span class="k-name">'+it.name+'</span>'
+      +'<span class="stepper"><button type="button" data-kq="'+it.id+'" data-d="-1" aria-label="Fewer">−</button>'
+      +'<input type="number" min="0" max="500" value="'+q+'" data-kin="'+it.id+'" inputmode="numeric" aria-label="'+it.name+'">'
+      +'<button type="button" data-kq="'+it.id+'" data-d="1" aria-label="More">+</button></span>'
+      +'<span class="k-amt">'+(q>0?inr(q*rate):'—')+'</span></div>';
+  });
+  var tq=kitQty();
+  html+='<div class="kit-total"><span>Kit total'+(tq>0?' — '+tq+' QRs × '+inr(rate):'')+'</span><span>'+(tq>0?inr(tq*rate):'₹0')+'</span></div>';
+  host.innerHTML=html;
+  host.querySelectorAll('[data-kq]').forEach(function(b){
+    b.addEventListener('click',function(){var id=this.dataset.kq;state.kit.qty[id]=Math.min(500,Math.max(0,state.kit.qty[id]+parseInt(this.dataset.d,10)));renderKit();syncBar();});
+  });
+  host.querySelectorAll('input[data-kin]').forEach(function(inp){
+    inp.addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.kit.qty[this.dataset.kin]=Math.min(500,Math.max(0,v));
+      var r=KIT_RATES[state.kit.branding].perQr,q=state.kit.qty[this.dataset.kin];
+      this.closest('.kit-row').querySelector('.k-amt').textContent=q>0?inr(q*r):'—';
+      var tq=kitQty();
+      host.querySelector('.kit-total').innerHTML='<span>Kit total'+(tq>0?' — '+tq+' QRs × '+inr(r):'')+'</span><span>'+(tq>0?inr(tq*r):'₹0')+'</span>';
+      syncBar();}});
+  });
+  host.querySelectorAll('[data-brand]').forEach(function(b){
+    b.addEventListener('click',function(){state.kit.branding=this.dataset.brand;renderKit();syncBar();});
+  });
+}
+function renderOnetime(){
+  var oh=document.getElementById('onetime-area');
+  var html='<div class="kit-row" style="border-bottom:1px solid var(--border);">'
+    +'<span class="k-name">Fresh OTA listings<span class="o-desc" style="display:block;font-weight:400;color:var(--text-muted);">'+inr(OTA_LISTING)+' per OTA — pick how many OTAs to list on</span></span>'
+    +'<span class="stepper"><button type="button" data-ota="-1" aria-label="Fewer OTA listings">−</button>'
+    +'<input type="number" min="0" max="30" value="'+state.otaQty+'" id="ota-qty" inputmode="numeric" aria-label="OTA listings">'
+    +'<button type="button" data-ota="1" aria-label="More OTA listings">+</button></span>'
+    +'<span class="k-amt">'+(state.otaQty>0?inr(state.otaQty*OTA_LISTING):'—')+'</span></div>';
+  html+=ONETIME.map(function(o){
+    return '<label class="opt'+(state.onetime[o.id]?' on':'')+'"><input type="checkbox" data-ot="'+o.id+'"'+(state.onetime[o.id]?' checked':'')+'>'
+      +'<span class="o-name">'+o.name+'</span><span class="o-price">'+inr(o.price)+' once</span></label>';
+  }).join('');
+  oh.innerHTML=html;
+  oh.querySelectorAll('input[data-ot]').forEach(function(inp){
+    inp.addEventListener('change',function(){state.onetime[this.dataset.ot]=this.checked;renderOnetime();syncBar();});
+  });
+  oh.querySelectorAll('[data-ota]').forEach(function(b){
+    b.addEventListener('click',function(){state.otaQty=Math.min(30,Math.max(0,state.otaQty+parseInt(this.dataset.ota,10)));renderOnetime();syncBar();});
+  });
+  oh.querySelector('#ota-qty').addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.otaQty=Math.min(30,Math.max(0,v));
+    this.closest('.kit-row').querySelector('.k-amt').textContent=state.otaQty>0?inr(state.otaQty*OTA_LISTING):'—';syncBar();}});
+}
+
+/* ---------- step 5: review ---------- */
+function renderReview(){
+  var q=quote();
+  document.getElementById('review-lead').textContent='DigiStay '+q.p.label+' · '+q.t.label+' · '+q.n+' '+q.p.unitWord+(q.n>1?'s':'');
+  document.getElementById('s-lines').innerHTML=q.lines.map(function(x){return '<div class="srow"><span class="l">'+x.l+'</span><span class="r">'+x.v+'</span></div>';}).join('');
   var c=COUPONS[state.term];
-  if(state.coupon&&(!c||c.code!==state.coupon))state.coupon=null;
-  var couponDisc=state.coupon&&c?Math.round(ONBOARD*c.off):0;
   var hint=document.getElementById('coupon-hint');
   if(c&&!state.coupon){hint.style.display='block';hint.className='coupon-hint';
     hint.innerHTML='<strong>'+c.code+'</strong> is available for your plan — '+c.label+'. Tap to apply.';
@@ -666,51 +674,26 @@ function renderSummary(){
     hint.onclick=null;}
   else{hint.style.display='none';}
   var cl=document.getElementById('coupon-line');
-  if(couponDisc>0){cl.style.display='flex';
+  if(q.couponDisc>0){cl.style.display='flex';
     document.getElementById('coupon-line-l').textContent='Coupon '+state.coupon;
-    document.getElementById('coupon-line-v').textContent='−'+inr(couponDisc).slice(0);}
+    document.getElementById('coupon-line-v').textContent='−'+inr(q.couponDisc);}
   else{cl.style.display='none';}
-  var ob=ONBOARD-couponDisc;
-  var pre=sub+extra+addTotal+ob+kit.total+otTotal;
-  var gst=pre*0.18;
-  var renew=sub+extra+addTotal;
-  document.getElementById('s-plan').textContent=p.label+' · '+t.label+' · '+n+' '+p.unitWord+(n>1?'s':'');
-  document.getElementById('s-lines').innerHTML=lines.map(function(x){return '<div class="srow"><span class="l">'+x.l+'</span><span class="r">'+x.v+'</span></div>';}).join('');
-  document.getElementById('s-gst').textContent=inr(gst);
-  document.getElementById('s-total').textContent=inr(pre+gst);
-  var onceTotal=ob+kit.total+otTotal;
+  document.getElementById('s-gst').textContent=inr(q.gst);
+  document.getElementById('s-total').textContent=inr(q.today);
   var onceEl=document.getElementById('s-once-note');
-  if(onceTotal>0){onceEl.style.display='';onceEl.textContent='Includes '+inr(onceTotal*1.18)+' of one-time charges (incl. GST) — paid only today.';}
+  if(q.once>0){onceEl.style.display='';onceEl.textContent='Includes '+inr(q.once*1.18)+' of one-time charges (incl. GST) — paid only today.';}
   else{onceEl.style.display='none';}
-  var renewWord={m:'Then every month',q:'Then every 3 months',h:'Then every 6 months',y:'Then every year'}[state.term];
-  document.getElementById('rb-label').textContent=renewWord;
-  document.getElementById('s-renew').textContent=inr(renew*1.18);
-  document.getElementById('s-renew-sub').textContent=(months>1?inr(renew*1.18/months)+'/mo effective · ':'')+'incl. 18% GST · '+p.label+' + your add-ons only';
+  document.getElementById('rb-label').textContent=q.t.word;
+  document.getElementById('s-renew').textContent=inr(q.renew);
+  document.getElementById('s-renew-sub').textContent=(q.months>1?inr(q.renew/q.months)+'/mo effective · ':'')+'incl. 18% GST · '+q.p.label+' + your add-ons only';
 }
-
-function renderAll(){renderCards();renderPills();renderAddons();renderKit();renderRooms();renderSummary();}
-function setTerm(k){state.term=k;document.querySelectorAll('.terms [data-term]').forEach(function(b){b.classList.toggle('on',b.dataset.term===k);});renderAll();}
-function showScreen(n){
-  document.getElementById('screen-select').style.display=n===1?'':'none';
-  document.getElementById('compare-sec').style.display=n===1?'':'none';
-  document.getElementById('faq-sec').style.display=n===1?'':'none';
-  document.getElementById('checkout').style.display=n===2?'':'none';
-  window.scrollTo({top:0,left:0,behavior:'instant'});
-}
-function pickPlan(k,stay){state.plan=k;renderAll();if(!stay)showScreen(2);}
-function bump(d){state.counts[state.plan]=Math.min(200,Math.max(1,cnt()+d));renderRooms();renderSummary();}
-document.getElementById('rooms').addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.counts[state.plan]=Math.min(200,Math.max(1,v));renderRooms();renderSummary();}});
-document.querySelectorAll('.terms [data-term]').forEach(function(b){b.addEventListener('click',function(){setTerm(this.dataset.term);});});
-showScreen(1);
-function payStub(){document.getElementById('pay-note').style.display='block';}
 function applyCoupon(){
   var v=document.getElementById('coupon-in').value.trim().toUpperCase(),err=document.getElementById('coupon-err'),c=COUPONS[state.term];
   if(!v)return;
-  if(c&&v===c.code){state.coupon=v;err.style.display='none';document.getElementById('coupon-in').value='';renderSummary();}
+  if(c&&v===c.code){state.coupon=v;err.style.display='none';document.getElementById('coupon-in').value='';renderReview();syncBar();}
   else{err.style.display='block';err.textContent='This code isn’t valid for the selected plan and billing term.';}
 }
-function removeCoupon(){state.coupon=null;document.getElementById('coupon-err').style.display='none';renderSummary();}
-var TERM_NAMES={q:'quarterly',h:'half-yearly',y:'yearly'};
+function removeCoupon(){state.coupon=null;document.getElementById('coupon-err').style.display='none';renderReview();syncBar();}
 function openCouponDD(){
   var dd=document.getElementById('coupon-dd'),html='';
   Object.keys(COUPONS).forEach(function(k){
@@ -725,10 +708,10 @@ function openCouponDD(){
     it.addEventListener('mousedown',function(e){
       e.preventDefault();
       var k=this.dataset.cterm;
-      if(state.term!==k)setTerm(k);
+      if(state.term!==k){state.term=k;}
       state.coupon=COUPONS[k].code;
       document.getElementById('coupon-err').style.display='none';
-      closeCouponDD();renderSummary();
+      closeCouponDD();renderReview();syncBar();
     });
   });
   dd.classList.add('open');
@@ -737,8 +720,7 @@ function closeCouponDD(){document.getElementById('coupon-dd').classList.remove('
 document.getElementById('coupon-in').addEventListener('focus',openCouponDD);
 document.getElementById('coupon-in').addEventListener('blur',function(){setTimeout(closeCouponDD,150);});
 
-/* ---- Integrations directory (source: Channex channel codes) ---- */
-var DIR_DATA={"basic":[{"n":"Agoda","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/agoda-logo.jpg"},{"n":"Airbnb","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/airbnb-logo.png"},{"n":"Bed-and-Breakfast.it","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-bedandbreakfast-it.png"},{"n":"Bookeasy","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/592fc0e3-4382-414f-a873-fe6397751604.png"},{"n":"Booking.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/bookingcom-logo.png"},{"n":"Check24","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/check24-logo.png"},{"n":"Ctoutvert / Secureholiday","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-ctoutvert.png"},{"n":"Despegar","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/5497aac5-58cb-4673-9dc0-3513cb38f1a0.png"},{"n":"Didatravel","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/524270f8-c22d-41b4-8acd-a5f302d9b08d.png"},{"n":"eDreams","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/edreams-logo.png"},{"n":"Emerging Travel Group","l":"https://channex.io/images/integrations/etg-logo.svg"},{"n":"Expedia","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/expedia-logo.png"},{"n":"Getaroom","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/a008ef7d-2bb3-4f59-a31d-95660d6140e5.png"},{"n":"Goibibo","l":"https://www.google.com/s2/favicons?domain=goibibo.com&sz=64"},{"n":"Google Hotels & Vacation Rentals","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/google-hotels-logo.png"},{"n":"Hipcamp","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hipcamp-logo.png"},{"n":"Hookusbookus","l":null},{"n":"Hopper","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/7b05812a-9203-4c34-b995-9a7fcbd64216.png"},{"n":"Hostelhop","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/64209784-51e7-4dcd-9fdf-29491a43908f.png"},{"n":"Hostelworld","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hostelworld-logo.png"},{"n":"Hotel Tonight","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hoteltonight-logo.png"},{"n":"Hotelbeds","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hotelbeds-logo.png"},{"n":"Hotelnetwork","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/6aba2cfe-3309-4b59-ba28-b19cda8e32e4.png"},{"n":"HotelREZ","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hotelrez-logo.png"},{"n":"Hoterip","l":null},{"n":"HRS","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hrs-logo.png"},{"n":"HRS Australia","l":null},{"n":"Hyperguest","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da51353c-aaa9-4fa4-ba27-c0c34f952887.png"},{"n":"Inntopia","l":null},{"n":"Klook","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/klook-logo.png"},{"n":"LocalOTA","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-localota.jpg"},{"n":"MakeMyTrip","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/7ad7313e-823b-4d7b-81ef-2c6ff7dde322.png"},{"n":"MG Bedbank","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mg-bedbank-logo.png"},{"n":"Ministry of Villas","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ministryofvillas-logo.png"},{"n":"Mitchell Corp","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mitchell-logo.jpeg"},{"n":"Moverii","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/moverii-logo.png"},{"n":"Mr & Mrs Smith","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mrandmrssmith-logo.jpg"},{"n":"OpenGDS.com","l":null},{"n":"Pitchup","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/82d1b7f7-d608-45d1-8f33-80c1ca408e78.png"},{"n":"PriceTravel","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/pricetravel-logo.jpg"},{"n":"Ratedock","l":null},{"n":"Reconline","l":null},{"n":"Resonline","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-resonline.png"},{"n":"Roibos","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da970051-848f-499c-a8cc-2c650fae0caf.png"},{"n":"Roombeast","l":null},{"n":"Spot2nite","l":null},{"n":"Szallas","l":null},{"n":"Tablet Michelin","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tablet-michelin-logo.png"},{"n":"Tiket","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tiket-logo.webp"},{"n":"TravelgateX","l":null},{"n":"Traveloka","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/traveloka-logo.png"},{"n":"Travia","l":null},{"n":"Trip.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tripcom-logo.png"},{"n":"VRBO","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/vrbo-logo.png"},{"n":"Waverick","l":null},{"n":"Wink","l":null},{"n":"World2Meet (W2M)","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/ota-world2meet.jpeg"}],"adv":{"cats":[[41,"OTAs"],[28,"GDS"],[27,"Metasearch Engines"],[26,"Wholesalers"]],"items":[{"n":"Abritel","l":null,"c":[41]},{"n":"Agoda","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/agoda-logo.jpg","c":[41]},{"n":"AirAsia","l":null,"c":[41]},{"n":"Airbnb","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/airbnb-logo.png","c":[41]},{"n":"Almosafer","l":null,"c":[41]},{"n":"AltoVita","l":null,"c":[41]},{"n":"Amadeus","l":null,"c":[28,42]},{"n":"ANZCRO","l":null,"c":[26]},{"n":"AOT","l":null,"c":[26]},{"n":"ATS Pacific","l":null,"c":[26]},{"n":"Attic Inn","l":null,"c":[26,41]},{"n":"Aubergenie","l":null,"c":[41]},{"n":"bag2bag","l":null,"c":[41]},{"n":"Bakuun","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"beachhuts.com","l":null,"c":[41]},{"n":"Bedandbreakfast.eu","l":null,"c":[41]},{"n":"Beds4Travel","l":null,"c":[26]},{"n":"Bedsonline","l":null,"c":[26]},{"n":"BookaBach","l":null,"c":[41]},{"n":"BookCabin","l":null,"c":[41]},{"n":"Bookeasy","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/592fc0e3-4382-414f-a873-fe6397751604.png","c":[41]},{"n":"Booking.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/bookingcom-logo.png","c":[41]},{"n":"Booking247.com","l":null,"c":[41]},{"n":"Bookingina","l":null,"c":[41]},{"n":"Bookit","l":null,"c":[41]},{"n":"BookMyBooking","l":null,"c":[41]},{"n":"BookNFly","l":null,"c":[41]},{"n":"Bookola","l":null,"c":[41]},{"n":"Bookonlinenow","l":null,"c":[41]},{"n":"bravofly","l":null,"c":[41]},{"n":"Brevistay","l":null,"c":[41]},{"n":"Britain's Finest","l":null,"c":[41]},{"n":"BungalowSpecials","l":null,"c":[41]},{"n":"Busy Rooms","l":null,"c":[41]},{"n":"CheapTickets","l":null,"c":[41]},{"n":"Check24","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/check24-logo.png","c":[41]},{"n":"Cleartrip","l":null,"c":[41]},{"n":"Club Mahindra","l":null,"c":[41]},{"n":"CNBooking","l":null,"c":[26]},{"n":"Columbus.to","l":null,"c":[41]},{"n":"Convergent International","l":null,"c":[26]},{"n":"Ctrip","l":null,"c":[41]},{"n":"Culture Travel","l":null,"c":[41]},{"n":"Darent","l":null,"c":[41]},{"n":"Decolar","l":null,"c":[41]},{"n":"Despegar","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/5497aac5-58cb-4673-9dc0-3513cb38f1a0.png","c":[41]},{"n":"Dida Travel","l":null,"c":[41]},{"n":"dnata","l":null,"c":[26]},{"n":"Dorms.com","l":null,"c":[41]},{"n":"EaseMyTrip","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[41]},{"n":"eBookers","l":null,"c":[41]},{"n":"EdreamsOdigeo","l":null,"c":[41]},{"n":"EET Global","l":null,"c":[26]},{"n":"eLong","l":null,"c":[41]},{"n":"Emerging Travel Group","l":"https://channex.io/images/integrations/etg-logo.svg","c":[41]},{"n":"Emirates Holidays","l":null,"c":[41]},{"n":"Entertainment Book","l":null,"c":[41]},{"n":"Expedia","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/expedia-logo.png","c":[41]},{"n":"Eztravel","l":null,"c":[41]},{"n":"Feratel","l":null,"c":[41]},{"n":"FerienparkSpecials","l":null,"c":[41]},{"n":"Fliggy","l":null,"c":[41]},{"n":"Flight Centre Wholesale","l":null,"c":[26]},{"n":"Flow","l":null,"c":[41]},{"n":"Flycreative","l":null,"c":[41]},{"n":"G2 Travel","l":null,"c":[41]},{"n":"getaroom","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/a008ef7d-2bb3-4f59-a31d-95660d6140e5.png","c":[41]},{"n":"Go Voyages","l":null,"c":[41]},{"n":"Gogo Vacations","l":null,"c":[26]},{"n":"Goibibo","l":null,"c":[41]},{"n":"Goldmedal","l":null,"c":[26]},{"n":"Google","l":null,"c":[27]},{"n":"GoQuo","l":null,"c":[26]},{"n":"Gotifi","l":null,"c":[41]},{"n":"Halalbooking","l":null,"c":[41]},{"n":"HeyTrip","l":null,"c":[41]},{"n":"Hibeds","l":null,"c":[26]},{"n":"Hobse","l":null,"c":[26]},{"n":"Hobse V2","l":null,"c":[41]},{"n":"Holida","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[41]},{"n":"HolidayParkSpecials","l":null,"c":[41]},{"n":"Holidu","l":null,"c":[41]},{"n":"Hoojoozat.com","l":null,"c":[41]},{"n":"Hooroo","l":null,"c":[41]},{"n":"Hopper (Hotel)","l":null,"c":[41]},{"n":"Hostelhunter.com","l":null,"c":[41]},{"n":"Hostelsclub","l":null,"c":[41]},{"n":"HostelWorld","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hostelworld-logo.png","c":[41]},{"n":"Hotel Network","l":null,"c":[28]},{"n":"HotelBeds","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hotelbeds-logo.png","c":[26]},{"n":"Hotelopia","l":null,"c":[41]},{"n":"Hotelrip","l":null,"c":[41]},{"n":"Hotels.com","l":null,"c":[41]},{"n":"Hotelsinone","l":null,"c":[26]},{"n":"Hotelspecials","l":null,"c":[41]},{"n":"HotelTonight","l":null,"c":[41]},{"n":"Hotwire","l":null,"c":[41]},{"n":"HPro Travel","l":null,"c":[26]},{"n":"HRS","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/hrs-logo.png","c":[41]},{"n":"Hummingbirdindia","l":null,"c":[26]},{"n":"HyperGuest","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da51353c-aaa9-4fa4-ba27-c0c34f952887.png","c":[26]},{"n":"iBook","l":null,"c":[41]},{"n":"iescape","l":null,"c":[41]},{"n":"Illusions Online","l":null,"c":[41]},{"n":"Infinity Holidays","l":null,"c":[26]},{"n":"IRCTC","l":null,"c":[41]},{"n":"Ixigo","l":null,"c":[41]},{"n":"jetcost","l":null,"c":[41]},{"n":"Jetstar","l":null,"c":[41]},{"n":"JL Tour","l":null,"c":[41]},{"n":"JOMhotel","l":null,"c":[41]},{"n":"Karpaten","l":null,"c":[26]},{"n":"Keytel","l":null,"c":[26]},{"n":"Klook","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/klook-logo.png","c":[41]},{"n":"Koob","l":null,"c":[41]},{"n":"lastminute.com","l":null,"c":[41]},{"n":"LetsGoa","l":null,"c":[41]},{"n":"Lido / AADX","l":null,"c":[28]},{"n":"Lido / AADX","l":null,"c":[28]},{"n":"Little Travel Group","l":null,"c":[41]},{"n":"Luxenomad","l":null,"c":[41]},{"n":"MakeMyTrip","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/7ad7313e-823b-4d7b-81ef-2c6ff7dde322.png","c":[41]},{"n":"Meituan","l":null,"c":[41]},{"n":"MG Bedbank","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/mg-bedbank-logo.png","c":[26]},{"n":"Miki Travel","l":null,"c":[26]},{"n":"MitchellCorp","l":null,"c":[26]},{"n":"Monasteries.com","l":null,"c":[41]},{"n":"Mr ' Mrs Smith","l":null,"c":[41]},{"n":"My Travel Bazaar","l":null,"c":[41]},{"n":"Myholiday Trip","l":null,"c":[41]},{"n":"myhotelbreak","l":null,"c":[41]},{"n":"not1night","l":null,"c":[41]},{"n":"Nuitee","l":null,"c":[41]},{"n":"Odeon","l":null,"c":[41]},{"n":"Odigeo","l":null,"c":[41]},{"n":"Offpeakluxury","l":null,"c":[41]},{"n":"Onefinerate.com","l":null,"c":[26]},{"n":"Online Vacations","l":null,"c":[26]},{"n":"Opodo","l":null,"c":[41]},{"n":"Orbitz","l":null,"c":[41]},{"n":"Ostrovok B2B","l":null,"c":[41]},{"n":"OTS Global","l":null,"c":[26]},{"n":"Ottila International","l":null,"c":[41]},{"n":"Pacific Bedbank","l":null,"c":[41]},{"n":"Pan Pacific","l":null,"c":[41]},{"n":"Pan Pacific Travel","l":null,"c":[26]},{"n":"Pegasus","l":null,"c":[28,42]},{"n":"PerfectStay","l":null,"c":[41]},{"n":"Pink Elephant International","l":null,"c":[41]},{"n":"Pitchup","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/82d1b7f7-d608-45d1-8f33-80c1ca408e78.png","c":[41]},{"n":"Plusgrade","l":null,"c":[41]},{"n":"Qantas","l":null,"c":[41]},{"n":"Qiyouji","l":null,"c":[41]},{"n":"Rakuten Travel","l":null,"c":[41]},{"n":"Ratehawk","l":null,"c":[41]},{"n":"Rateping","l":null,"c":[41]},{"n":"Rebranded Hpro","l":null,"c":[26]},{"n":"Reconline","l":null,"c":[28]},{"n":"Rehlat","l":null,"c":[41]},{"n":"Restel Travel","l":null,"c":[26]},{"n":"RezLive","l":null,"c":[26]},{"n":"Riya Holidays Pvt Ltd","l":null,"c":[26]},{"n":"Robinhood Travel","l":null,"c":[41]},{"n":"Roibos","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/da970051-848f-499c-a8cc-2c650fae0caf.png","c":[41]},{"n":"Rovitravel","l":null,"c":[26]},{"n":"Rumbo","l":null,"c":[41]},{"n":"Sabre","l":null,"c":[28,42]},{"n":"Scapia","l":null,"c":[41]},{"n":"Secret Retreats","l":null,"c":[41]},{"n":"Senetic Booking Engine","l":null,"c":[26]},{"n":"SilverDoor Apartments","l":null,"c":[41]},{"n":"Spabreaks","l":null,"c":[41]},{"n":"SpeedyBooker","l":null,"c":[41]},{"n":"STAAH GDS","l":null,"c":[28]},{"n":"Stay Bonanza","l":null,"c":[26]},{"n":"STAYKSA","l":null,"c":[41]},{"n":"Stayz","l":null,"c":[41]},{"n":"Sunlover Holidays","l":null,"c":[26]},{"n":"TabletHotels","l":null,"c":[41]},{"n":"TBO Holidays","l":null,"c":[26]},{"n":"Territory Discoveries","l":null,"c":[26]},{"n":"The Percentage App","l":"https://www.staah.com/wp-content/uploads/2023/09/Abode_Logo_positive-1-e1723594518146-150x150.png","c":[41]},{"n":"Tiket.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tiket-logo.webp","c":[41]},{"n":"tobook.com","l":null,"c":[41]},{"n":"TOMAS","l":null,"c":[41]},{"n":"Tourmind","l":null,"c":[41]},{"n":"Tourplan","l":null,"c":[26]},{"n":"Travcal","l":null,"c":[41]},{"n":"Travclan","l":null,"c":[41]},{"n":"Travco","l":null,"c":[26]},{"n":"Travel Republic","l":null,"c":[41]},{"n":"TravelBag","l":null,"c":[26]},{"n":"Travelbox","l":null,"c":[41]},{"n":"TravelBullz","l":null,"c":[41]},{"n":"TravelEssence / Little Travel Group","l":null,"c":[41]},{"n":"Travelguru","l":null,"c":[41]},{"n":"Travellink","l":null,"c":[41]},{"n":"Travelocity","l":null,"c":[41]},{"n":"Traveloka","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/traveloka-logo.png","c":[41]},{"n":"TravelplusApp","l":null,"c":[41]},{"n":"Travelport","l":null,"c":[28]},{"n":"TravelStay","l":null,"c":[41]},{"n":"Travex Connect","l":null,"c":[26,41]},{"n":"Trip Factory","l":null,"c":[41]},{"n":"Trip.com","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/tripcom-logo.png","c":[41]},{"n":"TripAdvisor","l":null,"c":[27]},{"n":"TripGain","l":null,"c":[26,41]},{"n":"Tripjack","l":null,"c":[41]},{"n":"Tripmartz","l":null,"c":[26]},{"n":"Tripmax","l":null,"c":[41]},{"n":"Trivago","l":null,"c":[27]},{"n":"TrustedStays","l":null,"c":[41]},{"n":"TWS4Hotels.com","l":null,"c":[26]},{"n":"Tytlees","l":null,"c":[26]},{"n":"UniversityRooms","l":null,"c":[41]},{"n":"Vacanceselect Travel","l":null,"c":[41]},{"n":"Vernost","l":null,"c":[41]},{"n":"via.com","l":null,"c":[41]},{"n":"villa-finder","l":null,"c":[41]},{"n":"volagratis","l":null,"c":[41]},{"n":"Voyaah","l":null,"c":[41]},{"n":"VRBO","l":"https://raw.githubusercontent.com/Evan135135/channex-website-live/main/public/lovable-uploads/vrbo-logo.png","c":[41]},{"n":"WebBeds ' Destinations of the World","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' Fitruums","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' Lots Of Hotels","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' SunHotels","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"WebBeds ' TotalStay","l":"https://www.staah.com/wp-content/uploads/2023/08/staah-favicon-orange-150x150.png","c":[26]},{"n":"weg.de","l":null,"c":[41]},{"n":"Withinearth","l":null,"c":[41]},{"n":"World-Blue","l":null,"c":[41]},{"n":"Wotif","l":null,"c":[41]},{"n":"Wowcher","l":null,"c":[41]},{"n":"Xendit","l":null,"c":[41]},{"n":"XML WORLD","l":null,"c":[26]},{"n":"Yalago","l":null,"c":[26]},{"n":"Yatra","l":null,"c":[41]},{"n":"Yuktravel","l":null,"c":[41]},{"n":"Zenhotels","l":null,"c":[41]},{"n":"Zuba","l":null,"c":[41]}]}};
+/* ---------- integrations directory ---------- */
 var dirMode='basic';
 function dirChip(it){
   var logo=it.l?'<img src="'+it.l+'" loading="lazy" alt="" onerror="this.style.display=\'none\'">':'<span class="mono" aria-hidden="true">'+it.n.charAt(0).toUpperCase()+'</span>';
@@ -749,7 +731,7 @@ function openDir(mode){
   var isAdv=mode==='adv',host=document.getElementById('dir-content'),html='';
   if(isAdv){
     document.getElementById('dir-title').textContent='Advanced Channel Manager — all integrations';
-    document.getElementById('dir-sub').textContent='Our advanced distribution network — 2,000+ channels and partners worldwide. 239 catalogued below across OTAs, GDS, metasearch and wholesalers.';
+    document.getElementById('dir-sub').textContent='Our advanced distribution network — 2,000+ channels and partners worldwide. '+DIR_DATA.adv.items.length+' catalogued below across OTAs, GDS, metasearch and wholesalers.';
     DIR_DATA.adv.cats.forEach(function(c){
       var items=DIR_DATA.adv.items.filter(function(it){return it.c.indexOf(c[0])>=0;});
       if(!items.length)return;
@@ -775,7 +757,7 @@ function filterDir(){
     ch.style.display=hit?'':'none';if(hit)shown++;
   });
   document.querySelectorAll('#dir-content .dir-sec-wrap').forEach(function(w){
-    var any=[...w.querySelectorAll('.chip')].some(function(c){return c.style.display!=='none';});
+    var any=false;w.querySelectorAll('.chip').forEach(function(c){if(c.style.display!=='none')any=true;});
     w.style.display=any?'':'none';
   });
   var total=dirMode==='adv'?DIR_DATA.adv.items.length:DIR_DATA.basic.length;
@@ -784,7 +766,31 @@ function filterDir(){
 }
 document.getElementById('dir-q').addEventListener('input',filterDir);
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDir();});
-renderAll();
+
+/* ---------- wizard navigation ---------- */
+var STEP_RENDER={1:function(){renderPlans();renderFtable();},2:renderTerms,3:renderRooms,4:function(){renderAddons();renderKit();},5:renderReview};
+function showStep(n){
+  state.step=n;
+  for(var i=1;i<=5;i++)document.getElementById('step-'+i).classList.toggle('on',i===n);
+  STEP_RENDER[n]();
+  document.getElementById('step-ind').textContent='Step '+n+' of 5';
+  document.getElementById('prog').style.width=(n*20)+'%';
+  document.getElementById('btn-back').style.visibility=n===1?'hidden':'visible';
+  document.getElementById('btn-next').textContent=n===5?'Continue to secure payment':(n===4?'Review order':'Continue');
+  syncBar();
+  window.scrollTo({top:0,left:0,behavior:'instant'});
+}
+function nav(d){
+  if(d===1&&state.step===5){document.getElementById('pay-note').style.display='block';return;}
+  showStep(Math.min(5,Math.max(1,state.step+d)));
+}
+function syncBar(){
+  var q=quote();
+  document.getElementById('bar-total').textContent='Today '+inr(q.today);
+  document.getElementById('bar-sub').textContent='Then '+inr(q.renew)+' '+q.t.short+' · '+q.p.label+' · '+q.n+' '+q.p.unitWord+(q.n>1?'s':'')+' · incl. GST';
+  if(state.step===5)renderReview();
+}
+showStep(1);
 </script>
 </body>
 </html>
