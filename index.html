@@ -77,6 +77,8 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 .frow>div{padding:11px 14px;font-size:13px;line-height:18px;text-align:center;}
 .frow>div:first-child{text-align:left;color:var(--b500);font-weight:500;}
 .frow.head>div{font-weight:700;color:var(--b800);font-size:13px;background:var(--grey-header);}
+.frow.fsec{grid-template-columns:1fr;}
+.frow.fsec>div{text-align:left;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--b400);background:var(--grey-header);padding:8px 14px;}
 .fcell.selcol{background:var(--v0);font-weight:600;color:var(--v900);}
 .frow.head .fcell.selcol{background:var(--v900);color:#fff;}
 .fy{color:var(--g900);font-weight:700;}
@@ -401,15 +403,33 @@ var BUNDLES={
     inc:'Basic Channel Manager · Smart/self check-in'}
 };
 var FEATURES=[
-  {n:'Rooms / units included',v:{basic:'15 + ₹49/room',advance:'15 + ₹149/room',homestay:'1 unit + ₹499'}},
-  {n:'Front desk, billing, ledger, reports',v:{basic:'y',advance:'y',homestay:'y'}},
-  {n:'Booking engine + WhatsApp',v:{basic:'y',advance:'y',homestay:'y'}},
-  {n:'Digi AI + BI dashboard',v:{basic:'y',advance:'y',homestay:'y'}},
-  {n:'Channel manager (OTA sync)',dir:true,v:{basic:'a',advance:'Advanced ✓',homestay:'a'}},
+  {sec:'Rooms & pricing'},
+  {n:'Rooms / units included in the price',v:{basic:'15 rooms',advance:'15 rooms',homestay:'1 unit — unlimited keys'}},
+  {n:'Each room / unit beyond that',v:{basic:'₹49/room/mo · no limit',advance:'₹149/room/mo',homestay:'₹499/listing/mo'}},
+  {sec:'Property management — included in every plan'},
+  {n:'Front desk — check-in & check-out',all:true},
+  {n:'Calendar & reservation system',all:true},
+  {n:'Billing, invoicing & ledger',all:true},
+  {n:'Guest folio management',all:true},
+  {n:'Reports + business intelligence dashboard',all:true},
+  {n:'Digi AI assistant',all:true},
+  {n:'WhatsApp guest communication',all:true},
+  {n:'Partner mobile app',all:true},
+  {n:'Dedicated relationship manager',all:true},
+  {sec:'Distribution & revenue'},
+  {n:'Booking engine + direct bookings',all:true},
+  {n:'Channel manager — OTA rate & availability sync',dir:true,v:{basic:'a999',advance:'Advanced CM ✓',homestay:'a999'}},
   {n:'Google Hotel ARI',v:{basic:'n',advance:'y',homestay:'n'}},
-  {n:'In-room dining',v:{basic:'a',advance:'y',homestay:'a'}},
-  {n:'Revenue tool + Form C + smart check-in',v:{basic:'a',advance:'y',homestay:'a'}},
-  {n:'Dedicated relationship manager',v:{basic:'y',advance:'y',homestay:'y'}}
+  {n:'RMS — dynamic pricing tool',v:{basic:'a999',advance:'y',homestay:'a999'}},
+  {sec:'Guest experience & compliance'},
+  {n:'Smart / self check-in',v:{basic:'a299',advance:'y',homestay:'a299'}},
+  {n:'Form C — foreign-guest reporting',v:{basic:'a199',advance:'y',homestay:'a199'}},
+  {n:'State compliance integration',v:{basic:'a199',advance:'a199',homestay:'a199'}},
+  {sec:'F&B & back office'},
+  {n:'In-room dining',v:{basic:'a299',advance:'y',homestay:'a299'}},
+  {n:'Restaurant billing (POS, tables, KOT)',v:{basic:'a499',advance:'a499',homestay:'a499'}},
+  {n:'Inventory management',v:{basic:'aF199',advance:'aF199',homestay:'aF199'}},
+  {n:'Tally integration',v:{basic:'a999',advance:'a999',homestay:'a999'}}
 ];
 var GROUPS=[
   {id:'cm',type:'check',title:'Basic Channel Manager',sub:'Live rate & availability sync for all your rooms. <button class="dir-link" onclick="openDir(\'basic\')">View OTA integrations →</button>',
@@ -525,20 +545,26 @@ function renderPlans(){
     c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
   });
 }
+function fcellHtml(v){
+  if(v==='y')return '<span class="fy">✓</span>';
+  if(v==='n')return '<span class="fn">—</span>';
+  if(typeof v==='string'&&v.charAt(0)==='a'&&/^aF?\d/.test(v)){
+    var from=v.charAt(1)==='F';
+    return '<span class="fa">Add-on · '+(from?'from ':'')+'₹'+v.replace(/^aF?/,'')+'/mo</span>';
+  }
+  return v;
+}
 function renderFtable(){
   var host=document.getElementById('ftable'),order=['basic','advance','homestay'];
   var html='<div class="frow head"><div>What you get</div>';
   order.forEach(function(k){html+='<div class="fcell'+(state.plan===k?' selcol':'')+'">'+PLANS[k].label+'</div>';});
   html+='</div>';
   FEATURES.forEach(function(f){
-    html+='<div class="frow"><div>'+f.n+(f.dir?' <button class="flink" onclick="openDir(state.plan===\'advance\'?\'adv\':\'basic\')">view</button>':'')+'</div>';
+    if(f.sec){html+='<div class="frow fsec"><div>'+f.sec+'</div></div>';return;}
+    html+='<div class="frow"><div>'+f.n+(f.dir?' <button class="flink" onclick="openDir(state.plan===\'advance\'?\'adv\':\'basic\')">view integrations</button>':'')+'</div>';
     order.forEach(function(k){
-      var v=f.v[k],cell;
-      if(v==='y')cell='<span class="fy">✓</span>';
-      else if(v==='n')cell='<span class="fn">—</span>';
-      else if(v==='a')cell='<span class="fa">Add-on</span>';
-      else cell=v;
-      html+='<div class="fcell'+(state.plan===k?' selcol':'')+'">'+cell+'</div>';
+      var v=f.all?'y':f.v[k];
+      html+='<div class="fcell'+(state.plan===k?' selcol':'')+'">'+fcellHtml(v)+'</div>';
     });
     html+='</div>';
   });
@@ -548,15 +574,16 @@ function renderFtable(){
 /* ---------- step 2: terms ---------- */
 function renderTerms(){
   var p=PLANS[state.plan];
-  document.getElementById('term-lead').textContent='DigiStay '+p.label+' — longer terms cost less per month, and unlock onboarding coupons.';
+  document.getElementById('term-lead').textContent='DigiStay '+p.label+' — the longer the term, the less you pay per month.';
   var host=document.getElementById('tcards'),html='';
   ['y','h','q','m'].forEach(function(k){
-    var t=TERMS[k],pr=p.prices[k],pm=pr/t.months,c=COUPONS[k];
+    var t=TERMS[k],pr=p.prices[k],pm=pr/t.months;
+    var save=k==='m'?0:p.prices.m*t.months-pr;
     html+='<div class="tcard'+(state.term===k?' sel':'')+'" data-t="'+k+'" role="button" tabindex="0">'
       +'<span class="radio" aria-hidden="true"></span>'
       +'<span class="t-main"><span class="t-name">'+t.label
-      +(k==='y'?'<span class="badge best">BEST VALUE · onboarding-free coupon</span>':'')
-      +'</span><span class="t-note" style="display:block;">'+(c?'Coupon '+c.code+' — '+c.label:'Full onboarding fee applies')+'</span></span>'
+      +(k==='y'?'<span class="badge best">BEST VALUE</span>':'')
+      +'</span><span class="t-note" style="display:block;">'+(k==='m'?'Pay as you go — change or cancel any month':'Save '+inr(save)+' vs paying monthly')+'</span></span>'
       +'<span class="t-price"><span class="t-pm" style="display:block;">'+effInr(pm)+'<span>/mo</span></span>'
       +'<span class="t-billed">'+(t.months>1?inr(pr)+' billed '+t.label.toLowerCase():'billed monthly')+'</span></span></div>';
   });
@@ -566,7 +593,7 @@ function renderTerms(){
     c.addEventListener('click',pick);
     c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
   });
-  document.getElementById('ob-note').textContent='One-time onboarding '+inr(obFee())+' for DigiStay '+p.label+' — apply your coupon at the review step.';
+  document.getElementById('ob-note').textContent='';
 }
 
 /* ---------- step 3: rooms ---------- */
