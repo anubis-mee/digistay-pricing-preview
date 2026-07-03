@@ -343,7 +343,8 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
         <div id="s-lines"></div>
         <div class="coupon-box" id="coupon-zone"></div>
         <div class="srow" id="coupon-line" style="display:none;"><span class="l" id="coupon-line-l"></span><span class="r free" id="coupon-line-v"></span></div>
-        <div class="srow"><span class="l">Includes GST (18%)<small>already in the prices above — nothing added</small></span><span class="r" id="s-gst"></span></div>
+        <div class="srow"><span class="l">Effective price (before GST)</span><span class="r" id="s-base"></span></div>
+        <div class="srow"><span class="l">GST (18%)<small>included in your price — we pay this to the Government of India</small></span><span class="r" id="s-gst"></span></div>
         <div class="srow total"><span class="l">Pay today</span><span class="r" id="s-total"></span></div>
         <p class="once-note" id="s-once-note"></p>
         <div class="renew-box">
@@ -352,9 +353,8 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
           <p class="rb-sub" id="s-renew-sub"></p>
           <p class="rb-note">Onboarding, kits and setup services are one-time — they are never charged again.</p>
         </div>
-        <p class="pay-sub">Powered by Zoho Billing · UPI, cards &amp; netbanking<br>Cancel or change your term at any renewal.</p>
         <div class="pay-note" id="pay-note">This preview stops here — in production this button opens the Zoho Billing hosted checkout with your exact configuration.</div>
-        <a class="talk" href="https://wa.me/916397009762">Prefer to talk? WhatsApp us →</a>
+        <a class="talk" href="https://wa.me/919258689779">Prefer to talk? WhatsApp us →</a>
       </div>
     </div>
   </section>
@@ -801,6 +801,7 @@ function renderReview(){
     document.getElementById('coupon-line-l').textContent='Coupon '+state.coupon;
     document.getElementById('coupon-line-v').textContent='−'+inr(q.couponDisc);}
   else{cl.style.display='none';}
+  document.getElementById('s-base').textContent=inr(q.today-q.gst);
   document.getElementById('s-gst').textContent=inr(q.gst);
   document.getElementById('s-total').textContent=inr(q.today);
   var onceEl=document.getElementById('s-once-note');
