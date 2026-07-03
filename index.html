@@ -66,7 +66,8 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 .pcard .tag{font-size:12px;line-height:17px;color:var(--text-muted);margin:4px 0 10px;min-height:34px;}
 .pcard .from{font-size:13px;color:var(--b500);}
 .pcard .from strong{font-size:20px;color:var(--b800);font-weight:700;}
-.pcard .runits{font-size:11.5px;line-height:16px;color:var(--v900);background:var(--white);border-radius:6px;padding:5px 8px;margin-top:10px;font-weight:500;}
+.pcard .runits{font-size:11.5px;line-height:16px;color:var(--v900);background:var(--white);border-radius:6px;padding:6px 9px;margin-top:10px;font-weight:400;}
+.pcard .runits .r1{display:block;font-weight:600;margin-bottom:1px;}
 .pcard.hs .runits{color:var(--blue-900);}
 
 /* feature table */
@@ -380,13 +381,13 @@ var TERMS={
 var PLANS={
   basic:{label:'Basic',tag:'The full PMS at the simplest price. Add OTA sync when you want it.',
     prices:{m:1799,q:4999,h:8999,y:14399},incUnits:15,extraPm:49,unitWord:'room',featured:true,defCount:12,
-    runits:'15 rooms included · ₹49/room/mo after · unlimited rooms'},
+    r1:'15 rooms included',r2:'₹49/room/mo after · unlimited rooms'},
   advance:{label:'Advance',tag:'For OTA-driven hotels — advanced channel sync, Google, revenue tools & in-room dining built in.',
     prices:{m:3999,q:10999,h:20999,y:35999},incUnits:15,extraPm:149,unitWord:'room',defCount:12,
-    runits:'15 rooms included · ₹149/room/mo after'},
+    r1:'15 rooms included',r2:'₹149/room/mo after'},
   homestay:{label:'Homestay',tag:'For homestays & villas — priced by the listing, not the room.',
     prices:{m:1499,q:4199,h:6999,y:11999},incUnits:1,extraPm:499,unitWord:'unit',defCount:1,hs:true,
-    runits:'1 unit, unlimited keys · ₹499/unit/mo per extra listing'}
+    r1:'1 unit, unlimited keys',r2:'₹499/unit/mo per extra listing'}
 };
 var BUNDLES={
   basic:{name:'Basic Growth Bundle',pm:1699,parts:['cm','rms','smart'],
@@ -515,7 +516,7 @@ function renderPlans(){
       +(p.featured?'<span class="pop">Most popular</span>':(p.hs?'<span class="hsb">Homestays &amp; villas</span>':'<span style="display:inline-block;height:18px;margin-bottom:8px;"></span>'))
       +'<h3>'+p.label+'</h3><p class="tag">'+p.tag+'</p>'
       +'<p class="from"><strong>'+effInr(p.prices.y/12)+'</strong>/mo <span style="font-size:11.5px;">billed yearly, all taxes included · '+inr(p.prices.m)+'/mo monthly</span></p>'
-      +'<p class="runits">'+p.runits+'</p></div>';
+      +'<p class="runits"><span class="r1">'+p.r1+'</span>'+p.r2+'</p></div>';
   });
   host.innerHTML=html;
   host.querySelectorAll('.pcard').forEach(function(c){
