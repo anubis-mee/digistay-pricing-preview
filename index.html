@@ -167,16 +167,44 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 .coupon-hint.applied{cursor:default;}
 .coupon-hint.applied:hover{text-decoration:none;}
 .coupon-err{display:none;font-size:12px;color:#B71C1C;margin-top:6px;}
-.coupon-dd{display:none;position:absolute;top:44px;left:0;right:0;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-card);box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:30;overflow:hidden;}
-.coupon-dd.open{display:block;}
-.cdd-item{padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;}
-.cdd-item:last-child{border-bottom:none;}
-.cdd-item:hover{background:var(--v0);}
-.cdd-code{font-size:13px;font-weight:700;}
-.cdd-tag{font-size:10px;font-weight:600;border-radius:var(--radius-pill);padding:1px 8px;margin-left:8px;vertical-align:1px;}
-.cdd-tag.ok{background:var(--g50);color:var(--g900);}
-.cdd-tag.sw{background:var(--blue-0);color:var(--blue-900);}
-.cdd-sub{font-size:11px;line-height:15px;color:var(--text-muted);margin-top:1px;}
+/* voucher tickets */
+.rcard{position:relative;}
+.voucher{display:flex;align-items:center;border:1.5px dashed var(--v800);border-radius:10px;background:var(--v0);margin-top:10px;cursor:pointer;position:relative;transition:transform .12s ease;}
+.voucher:hover{transform:translateY(-1px);}
+.voucher::before,.voucher::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:var(--white);border:1.5px dashed var(--v800);top:50%;}
+.voucher::before{left:-9px;transform:translateY(-50%);}
+.voucher::after{right:-9px;transform:translateY(-50%);}
+.v-stub{align-self:stretch;display:flex;align-items:center;padding:12px 14px 12px 20px;border-right:1.5px dashed var(--v800);}
+.v-code{font-weight:700;font-size:13px;letter-spacing:1.2px;color:var(--v900);}
+.v-main{flex:1;padding:10px 14px;min-width:0;}
+.v-title{font-size:13px;line-height:18px;font-weight:700;color:var(--v900);}
+.v-sub{font-size:11.5px;line-height:16px;color:var(--b500);margin-top:1px;}
+.v-right{display:flex;align-items:center;gap:8px;padding-right:16px;flex:none;}
+.v-cta{font-size:10px;font-weight:700;letter-spacing:.7px;background:var(--v900);color:#fff;border-radius:var(--radius-pill);padding:5px 12px;}
+.voucher.ghost{background:var(--grey-header);border-color:var(--b200);}
+.voucher.ghost::before,.voucher.ghost::after{border-color:var(--b200);}
+.voucher.ghost .v-stub{border-right-color:var(--b200);}
+.voucher.ghost .v-code{color:var(--b400);}
+.voucher.ghost .v-title{color:var(--b500);}
+.voucher.ghost .v-cta{background:var(--blue-900);}
+.voucher.applied{background:var(--g50);border-color:#2E7D32;cursor:default;animation:vpop .35s ease;}
+.voucher.applied:hover{transform:none;}
+.voucher.applied::before,.voucher.applied::after{border-color:#2E7D32;}
+.voucher.applied .v-stub{border-right-color:#2E7D32;}
+.voucher.applied .v-code{color:var(--g900);}
+.voucher.applied .v-title{color:var(--g900);}
+.v-check{width:22px;height:22px;border-radius:50%;background:#2E7D32;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none;}
+.v-remove{background:none;border:none;color:var(--b500);font-size:11px;text-decoration:underline;cursor:pointer;padding:0;}
+@keyframes vpop{0%{transform:scale(.95)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+.cz-toggle{background:none;border:none;color:var(--link);font-size:12px;margin-top:10px;cursor:pointer;padding:0;}
+.cz-toggle:hover{text-decoration:underline;}
+#cz-input{display:none;gap:8px;margin-top:8px;}
+.shake{animation:czshake .35s;}
+@keyframes czshake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5;}
+.confetti span{position:absolute;top:34%;width:7px;height:11px;border-radius:2px;opacity:0;animation:cburst 1.1s ease-out forwards;}
+@keyframes cburst{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--dx),95px) rotate(var(--rot))}}
+@media (prefers-reduced-motion: reduce){.voucher,.voucher.applied{transition:none;animation:none;}.confetti{display:none;}.shake{animation:none;}}
 .renew-box{background:var(--v0);border:1px solid var(--v100);border-radius:var(--radius-card);padding:14px 16px;margin-top:16px;}
 .renew-box .rb-label{font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--v900);}
 .renew-box .rb-amt{font-size:24px;line-height:30px;font-weight:700;color:var(--v900);margin-top:2px;}
@@ -313,17 +341,7 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
     <div class="review">
       <div class="rcard">
         <div id="s-lines"></div>
-        <div class="coupon-box">
-          <div style="position:relative;">
-            <div style="display:flex;gap:8px;">
-              <input class="coupon-in" id="coupon-in" type="text" placeholder="Coupon code — tap to see available" aria-label="Coupon code" autocomplete="off">
-              <button type="button" class="coupon-apply" onclick="applyCoupon()">Apply</button>
-            </div>
-            <div class="coupon-dd" id="coupon-dd"></div>
-          </div>
-          <p class="coupon-hint" id="coupon-hint"></p>
-          <p class="coupon-err" id="coupon-err"></p>
-        </div>
+        <div class="coupon-box" id="coupon-zone"></div>
         <div class="srow" id="coupon-line" style="display:none;"><span class="l" id="coupon-line-l"></span><span class="r free" id="coupon-line-v"></span></div>
         <div class="srow"><span class="l">Includes GST (18%)<small>already in the prices above — nothing added</small></span><span class="r" id="s-gst"></span></div>
         <div class="srow total"><span class="l">Pay today</span><span class="r" id="s-total"></span></div>
@@ -777,15 +795,7 @@ function renderReview(){
   var q=quote();
   document.getElementById('review-lead').textContent='DigiStay '+q.p.label+' · '+q.t.label+' · '+q.n+' '+q.p.unitWord+(q.n>1?'s':'');
   document.getElementById('s-lines').innerHTML=q.lines.map(function(x){return '<div class="srow"><span class="l">'+x.l+'</span><span class="r">'+x.v+'</span></div>';}).join('');
-  var c=COUPONS[state.term];
-  var hint=document.getElementById('coupon-hint');
-  if(c&&!state.coupon){hint.style.display='block';hint.className='coupon-hint';
-    hint.innerHTML='<strong>'+c.code+'</strong> is available for your plan — '+c.label+'. Tap to apply.';
-    hint.onclick=function(){document.getElementById('coupon-in').value=c.code;applyCoupon();};}
-  else if(state.coupon){hint.style.display='block';hint.className='coupon-hint applied';
-    hint.innerHTML='<strong>'+state.coupon+'</strong> applied — '+c.label+'. <a href="#" onclick="event.stopPropagation();removeCoupon();return false;">Remove</a>';
-    hint.onclick=null;}
-  else{hint.style.display='none';}
+  renderCoupons();
   var cl=document.getElementById('coupon-line');
   if(q.couponDisc>0){cl.style.display='flex';
     document.getElementById('coupon-line-l').textContent='Coupon '+state.coupon;
@@ -800,38 +810,83 @@ function renderReview(){
   document.getElementById('s-renew').textContent=inr(q.renew);
   document.getElementById('s-renew-sub').textContent=(q.months>1?effInr(q.renew/q.months)+'/mo effective · ':'')+'all taxes included · '+q.p.label+' + your add-ons only';
 }
-function applyCoupon(){
-  var v=document.getElementById('coupon-in').value.trim().toUpperCase(),err=document.getElementById('coupon-err'),c=COUPONS[state.term];
-  if(!v)return;
-  if(c&&v===c.code){state.coupon=v;err.style.display='none';document.getElementById('coupon-in').value='';renderReview();syncBar();}
-  else{err.style.display='block';err.textContent='This code isn’t valid for the selected plan and billing term.';}
-}
-function removeCoupon(){state.coupon=null;document.getElementById('coupon-err').style.display='none';renderReview();syncBar();}
-function openCouponDD(){
-  var dd=document.getElementById('coupon-dd'),html='';
-  Object.keys(COUPONS).forEach(function(k){
-    var c=COUPONS[k],ok=state.term===k;
-    html+='<div class="cdd-item" data-cterm="'+k+'">'
-      +'<span class="cdd-code">'+c.code+'</span>'
-      +(ok?'<span class="cdd-tag ok">Available for your plan</span>':'<span class="cdd-tag sw">Switch to '+TERM_NAMES[k]+' &amp; apply</span>')
-      +'<p class="cdd-sub">'+c.label.charAt(0).toUpperCase()+c.label.slice(1)+' · requires '+TERM_NAMES[k]+' billing</p></div>';
-  });
-  dd.innerHTML=html;
-  dd.querySelectorAll('.cdd-item').forEach(function(it){
-    it.addEventListener('mousedown',function(e){
-      e.preventDefault();
-      var k=this.dataset.cterm;
-      if(state.term!==k){state.term=k;}
-      state.coupon=COUPONS[k].code;
-      document.getElementById('coupon-err').style.display='none';
-      closeCouponDD();renderReview();syncBar();
+function couponSaveAmt(k){return Math.round(obFee()*COUPONS[k].off);}
+function labelCap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function renderCoupons(){
+  var host=document.getElementById('coupon-zone');if(!host)return;
+  var html='',cur=COUPONS[state.term];
+  if(state.coupon&&cur){
+    html+='<div class="voucher applied"><div class="v-stub"><span class="v-code">'+state.coupon+'</span></div>'
+      +'<div class="v-main"><p class="v-title">Coupon applied — you saved '+inr(couponSaveAmt(state.term))+'</p>'
+      +'<p class="v-sub">'+labelCap(cur.label)+'</p></div>'
+      +'<div class="v-right"><span class="v-check" aria-hidden="true">✓</span><button class="v-remove" onclick="removeCoupon()">Remove</button></div></div>';
+  }else{
+    var order=(cur?[state.term]:[]).concat(Object.keys(COUPONS).filter(function(k){return k!==state.term;}));
+    order.forEach(function(k){
+      var c=COUPONS[k],mine=k===state.term;
+      html+='<div class="voucher'+(mine?'':' ghost')+'" role="button" tabindex="0" data-ck="'+k+'" aria-label="Apply coupon '+c.code+'">'
+        +'<div class="v-stub"><span class="v-code">'+c.code+'</span></div>'
+        +'<div class="v-main"><p class="v-title">'+(mine?'Save '+inr(couponSaveAmt(k))+' on onboarding':labelCap(c.label))+'</p>'
+        +'<p class="v-sub">'+(mine?'Available for your plan — tap to apply':'Switch to '+TERM_NAMES[k]+' billing & apply')+'</p></div>'
+        +'<div class="v-right"><span class="v-cta">'+(mine?'APPLY':'SWITCH')+'</span></div></div>';
     });
+  }
+  html+='<button class="cz-toggle" type="button" onclick="var e=document.getElementById(\'cz-input\');e.style.display=e.style.display==='+"'flex'"+'?\'none\':\'flex\';">Have a different code?</button>'
+    +'<div id="cz-input"><input class="coupon-in" id="coupon-in" type="text" placeholder="Enter code" autocomplete="off" aria-label="Coupon code">'
+    +'<button type="button" class="coupon-apply" onclick="applyCoupon()">Apply</button></div>'
+    +'<p class="coupon-err" id="coupon-err"></p>';
+  host.innerHTML=html;
+  host.querySelectorAll('.voucher[data-ck]').forEach(function(v){
+    function go(){applyCouponTerm(v.dataset.ck);}
+    v.addEventListener('click',go);
+    v.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
   });
-  dd.classList.add('open');
+  var inp=host.querySelector('#coupon-in');
+  if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')applyCoupon();});
 }
-function closeCouponDD(){document.getElementById('coupon-dd').classList.remove('open');}
-document.getElementById('coupon-in').addEventListener('focus',openCouponDD);
-document.getElementById('coupon-in').addEventListener('blur',function(){setTimeout(closeCouponDD,150);});
+function celebrate(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var card=document.querySelector('#step-5 .rcard');if(!card)return;
+  var host=document.createElement('div');host.className='confetti';
+  var colors=['#6609BE','#2E7D32','#F57F17','#0D47A1','#9D7FDD','#1D9E75'];
+  for(var i=0;i<18;i++){
+    var s=document.createElement('span');
+    s.style.left=(18+Math.random()*64)+'%';
+    s.style.background=colors[i%colors.length];
+    s.style.setProperty('--dx',(Math.random()*180-90)+'px');
+    s.style.setProperty('--rot',(Math.random()*540-270)+'deg');
+    s.style.animationDelay=(Math.random()*0.12)+'s';
+    host.appendChild(s);
+  }
+  card.appendChild(host);
+  setTimeout(function(){host.remove();},1300);
+}
+function tickTotal(from,to){
+  var el=document.getElementById('s-total');if(!el)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=inr(to);return;}
+  var t0=performance.now(),dur=700;
+  function f(t){var p=Math.min(1,(t-t0)/dur);p=1-Math.pow(1-p,3);
+    el.textContent=inr(from+(to-from)*p);
+    if(p<1)requestAnimationFrame(f);}
+  requestAnimationFrame(f);
+}
+function applyCouponTerm(k){
+  var before=quote().today;
+  if(state.term!==k)state.term=k;
+  state.coupon=COUPONS[k].code;
+  renderReview();syncBar();celebrate();
+  tickTotal(before,quote().today);
+}
+function applyCoupon(){
+  var inp=document.getElementById('coupon-in');if(!inp)return;
+  var v=inp.value.trim().toUpperCase(),err=document.getElementById('coupon-err');
+  if(!v)return;
+  var hit=Object.keys(COUPONS).filter(function(k){return COUPONS[k].code===v;})[0];
+  if(hit){err.style.display='none';applyCouponTerm(hit);}
+  else{err.style.display='block';err.textContent='This code isn’t valid.';
+    var z=document.getElementById('cz-input');if(z){z.classList.remove('shake');void z.offsetWidth;z.classList.add('shake');}}
+}
+function removeCoupon(){state.coupon=null;renderReview();syncBar();}
 
 /* ---------- integrations directory ---------- */
 var dirMode='basic';
