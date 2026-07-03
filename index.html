@@ -262,7 +262,7 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
     <div class="ftable" id="ftable"></div>
     <div class="faq">
       <h2>Common questions</h2>
-      <details><summary>What is the one-time onboarding fee?</summary><p>₹4,999 covers everything to go live: data migration, OTA connections, staff training and your dedicated relationship manager's setup time. It is charged once per property, never again. Coupon codes are available on longer billing terms — checkout shows you the code that applies, up to a fully-waived onboarding fee on yearly billing.</p></details>
+      <details><summary>What is the one-time onboarding fee?</summary><p>It covers everything to go live: data migration, OTA connections, staff training and your dedicated relationship manager's setup time — ₹1,999 for Homestay, ₹2,999 for Basic and ₹4,999 for Advance. It is charged once per property, never again. Coupon codes are available on longer billing terms: 25% off on quarterly, 50% off on half-yearly, and fully waived on yearly — checkout shows you the code that applies.</p></details>
       <details><summary>How does per-room pricing work?</summary><p>Basic and Advance both include 15 rooms, and you can add as many rooms as you want on either plan. Beyond 15, Basic adds ₹50 per room per month and Advance adds ₹150 — the difference reflects the real cost of syncing each extra room's rates and availability to OTAs and Google.</p></details>
       <details><summary>How is a homestay priced?</summary><p>By the unit, not the key. One listing — however many bedrooms or keys are inside it — is one unit, and Homestay starts at exactly one unit. Each additional listing adds ₹500 per unit per month.</p></details>
       <details><summary>What's the difference between the Basic and Advanced Channel Manager?</summary><p>The Basic Channel Manager (an add-on on Basic and Homestay) syncs rates and availability directly to 50+ major OTAs — Booking.com, MakeMyTrip-Goibibo, Agoda, Airbnb, Expedia and more — with 400+ integrations in total via Channex. The Advanced Channel Manager, built into the Advance plan, connects our advanced distribution network of 2,000+ channels and partners — OTAs, GDS, wholesalers and metasearch — plus Google Hotel ARI and the revenue-management tool.</p></details>
@@ -379,14 +379,25 @@ var TERMS={
 };
 var PLANS={
   basic:{label:'Basic',tag:'The full PMS at the simplest price. Add OTA sync when you want it.',
-    prices:{m:1599,q:4499,h:7999,y:12999},incUnits:15,extraPm:50,unitWord:'room',featured:true,defCount:12,
+    prices:{m:1499,q:4199,h:7499,y:11999},incUnits:15,extraPm:50,unitWord:'room',featured:true,defCount:12,
     runits:'15 rooms included · ₹50/room/mo after · unlimited rooms'},
-  advance:{label:'Advance',tag:'For OTA-driven hotels — advanced channel sync, Google and revenue tools built in.',
-    prices:{m:3499,q:9999,h:17999,y:32999},incUnits:15,extraPm:150,unitWord:'room',defCount:12,
+  advance:{label:'Advance',tag:'For OTA-driven hotels — advanced channel sync, Google, revenue tools & in-room dining built in.',
+    prices:{m:3299,q:8999,h:16999,y:29999},incUnits:15,extraPm:150,unitWord:'room',defCount:12,
     runits:'15 rooms included · ₹150/room/mo after'},
   homestay:{label:'Homestay',tag:'For homestays & villas — priced by the listing, not the room.',
-    prices:{m:1299,q:3699,h:6499,y:10999},incUnits:1,extraPm:500,unitWord:'unit',defCount:1,hs:true,
+    prices:{m:1199,q:3499,h:5999,y:9999},incUnits:1,extraPm:500,unitWord:'unit',defCount:1,hs:true,
     runits:'1 unit, unlimited keys · ₹500/unit/mo per extra listing'}
+};
+var BUNDLES={
+  basic:{name:'Basic Growth Bundle',pm:1699,parts:['cm','rms','smart'],
+    desc:'Get booked everywhere, price smartly and skip the front-desk queue — together for less.',
+    inc:'Basic Channel Manager · RMS dynamic pricing · Smart/self check-in'},
+  advance:{name:'Advance Ops Bundle',pm:1499,parts:['fnb-res','inv-pro','tally'],
+    desc:'Run the whole property — restaurant, stock and accounting in one bundle.',
+    inc:'Restaurant billing · Inventory Pro · Tally integration'},
+  homestay:{name:'Homestay Bundle',pm:899,parts:['cm','smart'],
+    desc:'Get booked everywhere and let guests check themselves in.',
+    inc:'Basic Channel Manager · Smart/self check-in'}
 };
 var FEATURES=[
   {n:'Rooms / units included',v:{basic:'15 + ₹50/room',advance:'15 + ₹150/room',homestay:'1 unit + ₹500'}},
@@ -395,6 +406,7 @@ var FEATURES=[
   {n:'Digi AI + BI dashboard',v:{basic:'y',advance:'y',homestay:'y'}},
   {n:'Channel manager (OTA sync)',dir:true,v:{basic:'a',advance:'Advanced ✓',homestay:'a'}},
   {n:'Google Hotel ARI',v:{basic:'n',advance:'y',homestay:'n'}},
+  {n:'In-room dining',v:{basic:'a',advance:'y',homestay:'a'}},
   {n:'Revenue tool + Form C + smart check-in',v:{basic:'a',advance:'y',homestay:'a'}},
   {n:'Dedicated relationship manager',v:{basic:'y',advance:'y',homestay:'y'}}
 ];
@@ -432,33 +444,48 @@ var ONETIME=[
   {id:'gl',name:'Google listing',price:3500},
   {id:'web',name:'Property website',price:10000}
 ];
-var ONBOARD=4999;
+var ONBOARD={homestay:1999,basic:2999,advance:4999};
+function obFee(){return ONBOARD[state.plan];}
 var COUPONS={q:{code:'QUARTER25',off:0.25,label:'25% off onboarding'},h:{code:'HALF50',off:0.5,label:'50% off onboarding'},y:{code:'ANNUALFREE',off:1,label:'onboarding completely free'}};
 var TERM_NAMES={q:'quarterly',h:'half-yearly',y:'yearly'};
-var state={step:1,term:'y',plan:'basic',counts:{homestay:1,basic:12,advance:12},checks:{},radios:{fnb:'fnb-none',invg:'inv-none'},onetime:{},otaQty:0,coupon:null,
+var state={step:1,term:'y',plan:'basic',bundle:false,counts:{homestay:1,basic:12,advance:12},checks:{},radios:{fnb:'fnb-none',invg:'inv-none'},onetime:{},otaQty:0,coupon:null,
   kit:{branding:'std',qty:{self:0,ird:0,table:0}}};
 function cnt(){return state.counts[state.plan];}
 function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
 function pmOf(item){return typeof item.pm==='object'?item.pm[state.term]:item.pm;}
+function itemsFor(g){
+  if(g.id==='fnb'&&state.plan==='advance')return g.items.filter(function(it){return it.id==='fnb-none'||it.id==='fnb-res';});
+  return g.items;
+}
+function normalizeState(){
+  if(state.plan==='advance'){
+    if(state.radios.fnb==='fnb-ird')state.radios.fnb='fnb-none';
+    else if(state.radios.fnb==='fnb-all')state.radios.fnb='fnb-res';
+  }
+}
 
 /* ---------- pricing math (single source of truth) ---------- */
 function quote(){
+  normalizeState();
   var p=PLANS[state.plan],t=TERMS[state.term],months=t.months,n=cnt();
   var sub=p.prices[state.term];
   var extraN=Math.max(0,n-p.incUnits),extra=extraN*p.extraPm*months;
   var lines=[{l:p.label+' plan <small>'+t.label+' billing · '+p.incUnits+' '+p.unitWord+(p.incUnits>1?'s':'')+' included</small>',v:inr(sub)}];
   if(extra>0)lines.push({l:'Extra '+p.unitWord+'s ×'+extraN,v:inr(extra)});
   var addTotal=0;
+  var bundle=BUNDLES[state.plan],bundleOn=state.bundle&&bundle;
+  if(bundleOn){addTotal+=bundle.pm*months;lines.push({l:bundle.name+' <small>'+bundle.inc+'</small>',v:inr(bundle.pm*months)});}
   GROUPS.forEach(function(g){
     if(g.includedIn&&g.includedIn.indexOf(state.plan)>=0)return;
-    g.items.forEach(function(it){
+    itemsFor(g).forEach(function(it){
       if(it.incAdv&&state.plan==='advance')return;
+      if(bundleOn&&bundle.parts.indexOf(it.id)>=0)return;
       var on=g.type==='radio'?state.radios[g.id]===it.id:!!state.checks[it.id];
       var pm=pmOf(it);
       if(on&&pm>0){addTotal+=pm*months;lines.push({l:it.name,v:inr(pm*months)});}
     });
   });
-  lines.push({l:'Onboarding <small>one-time</small>',v:inr(ONBOARD)});
+  lines.push({l:'Onboarding <small>one-time</small>',v:inr(obFee())});
   var rate=KIT_RATES[state.kit.branding],kitTotal=0;
   KIT_TYPES.forEach(function(it){
     var q=state.kit.qty[it.id];
@@ -469,8 +496,8 @@ function quote(){
   ONETIME.forEach(function(o){if(state.onetime[o.id]){otTotal+=o.price;lines.push({l:o.name+' <small>one-time</small>',v:inr(o.price)});}});
   var c=COUPONS[state.term];
   if(state.coupon&&(!c||c.code!==state.coupon))state.coupon=null;
-  var couponDisc=state.coupon&&c?Math.round(ONBOARD*c.off):0;
-  var ob=ONBOARD-couponDisc;
+  var couponDisc=state.coupon&&c?Math.round(obFee()*c.off):0;
+  var ob=obFee()-couponDisc;
   var pre=sub+extra+addTotal+ob+kitTotal+otTotal;
   var renew=sub+extra+addTotal;
   return {p:p,t:t,months:months,n:n,lines:lines,couponDisc:couponDisc,once:ob+kitTotal+otTotal,
@@ -491,7 +518,7 @@ function renderPlans(){
   });
   host.innerHTML=html;
   host.querySelectorAll('.pcard').forEach(function(c){
-    function pick(){state.plan=c.dataset.p;renderPlans();renderFtable();syncBar();}
+    function pick(){if(state.bundle)toggleBundle(false);state.plan=c.dataset.p;renderPlans();renderFtable();syncBar();}
     c.addEventListener('click',pick);
     c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
   });
@@ -537,7 +564,7 @@ function renderTerms(){
     c.addEventListener('click',pick);
     c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
   });
-  document.getElementById('ob-note').textContent='One-time onboarding ₹4,999 applies to every plan — apply your coupon at the review step.';
+  document.getElementById('ob-note').textContent='One-time onboarding '+inr(obFee())+' for DigiStay '+p.label+' — apply your coupon at the review step.';
 }
 
 /* ---------- step 3: rooms ---------- */
@@ -566,31 +593,62 @@ function bump(d){state.counts[state.plan]=Math.min(200,Math.max(1,cnt()+d));rend
 document.getElementById('rooms').addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.counts[state.plan]=Math.min(200,Math.max(1,v));renderRooms();syncBar();}});
 
 /* ---------- step 4: extras ---------- */
+function bundleSave(){
+  var b=BUNDLES[state.plan];if(!b)return 0;
+  var sum=0;
+  GROUPS.forEach(function(g){g.items.forEach(function(it){if(b.parts.indexOf(it.id)>=0)sum+=pmOf(it);});});
+  return Math.max(0,sum-b.pm);
+}
+function toggleBundle(on){
+  state.bundle=on;
+  var b=BUNDLES[state.plan];
+  if(b){
+    b.parts.forEach(function(pid){
+      if(pid.indexOf('fnb-')===0)state.radios.fnb=on?pid:'fnb-none';
+      else if(pid.indexOf('inv-')===0)state.radios.invg=on?pid:'inv-none';
+      else state.checks[pid]=on;
+    });
+  }
+  renderAddons();syncBar();
+}
 function renderAddons(){
+  normalizeState();
   var host=document.getElementById('addon-area'),html='';
-  GROUPS.forEach(function(g,gi){
+  var b=BUNDLES[state.plan],bundleOn=state.bundle&&b;
+  if(b){
+    html+='<p class="x-title">Bundle &amp; save <span class="o-save">Save '+inr(bundleSave())+'/mo</span></p>'
+      +'<p class="x-sub">'+b.desc+'</p>'
+      +'<label class="opt'+(bundleOn?' on':'')+'"><input type="checkbox" id="bundle-cb"'+(bundleOn?' checked':'')+'>'
+      +'<span class="o-name">'+b.name+'<span class="o-desc">'+b.inc+'</span></span>'
+      +'<span class="o-price">'+inr(b.pm)+'/mo</span></label>';
+  }
+  GROUPS.forEach(function(g){
     var included=g.includedIn&&g.includedIn.indexOf(state.plan)>=0;
     var title=(included&&g.titleAdv)?g.titleAdv:g.title;
     var sub=(included&&g.subAdv)?g.subAdv:g.sub;
-    html+=(gi>0?'<div style="border-top:1px solid var(--border);margin:16px 0 12px;"></div>':'')
+    if(g.id==='fnb'&&state.plan==='advance')sub='In-room dining is already included in Advance — add restaurant billing if you need it.';
+    html+='<div style="border-top:1px solid var(--border);margin:16px 0 12px;"></div>'
       +'<p class="x-title">'+title+(included?' <span class="inc-tag">Included in Advance</span>':'')+'</p>'
       +(sub?'<p class="x-sub">'+sub+'</p>':'');
     if(!included){
-      g.items.forEach(function(it){
+      itemsFor(g).forEach(function(it){
         var incAdv=it.incAdv&&state.plan==='advance';
+        var inBundle=bundleOn&&b.parts.indexOf(it.id)>=0;
         var checked=g.type==='radio'?state.radios[g.id]===it.id:!!state.checks[it.id];
-        var price=pmOf(it);
-        var priceHtml=incAdv?'<span class="inc-tag">Included</span>':(price?'<span class="o-price">'+inr(price)+'/mo</span>':'<span class="o-price" style="color:var(--b400)">₹0</span>');
-        html+='<label class="opt'+(checked&&!incAdv?' on':'')+'"'+(incAdv?' style="opacity:.55;cursor:default;"':'')+'>'
+        var lock=incAdv||inBundle;
+        var priceHtml=incAdv?'<span class="inc-tag">Included</span>':(inBundle?'<span class="inc-tag">In your bundle</span>':(pmOf(it)?'<span class="o-price">'+inr(pmOf(it))+'/mo</span>':'<span class="o-price" style="color:var(--b400)">₹0</span>'));
+        html+='<label class="opt'+(checked&&!lock?' on':'')+'"'+(lock?' style="opacity:.55;cursor:default;"':'')+'>'
           +'<input type="'+(g.type==='radio'?'radio':'checkbox')+'" name="'+g.id+'" data-g="'+g.id+'" data-i="'+it.id+'"'
-          +(checked&&!incAdv?' checked':'')+(incAdv?' disabled':'')+'>'
+          +((checked&&!incAdv)||inBundle?' checked':'')+(lock?' disabled':'')+'>'
           +'<span class="o-name">'+it.name+(it.desc?'<span class="o-desc">'+it.desc+'</span>':'')+'</span>'
-          +priceHtml+(it.save&&!incAdv?'<span class="o-save">'+it.save+'</span>':'')+'</label>';
+          +priceHtml+(it.save&&!lock?'<span class="o-save">'+it.save+'</span>':'')+'</label>';
       });
     }
   });
   host.innerHTML=html;
-  host.querySelectorAll('input').forEach(function(inp){
+  var bcb=host.querySelector('#bundle-cb');
+  if(bcb)bcb.addEventListener('change',function(){toggleBundle(this.checked);});
+  host.querySelectorAll('input[data-g]').forEach(function(inp){
     inp.addEventListener('change',function(){
       var g=this.dataset.g,i=this.dataset.i;
       var grp=GROUPS.filter(function(x){return x.id===g;})[0];
