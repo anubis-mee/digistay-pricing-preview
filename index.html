@@ -382,7 +382,7 @@ var TERMS={
 };
 var PLANS={
   basic:{label:'Basic',tag:'The full PMS at the simplest price. Add OTA sync when you want it.',
-    prices:{m:1799,q:4999,h:8999,y:14399},incUnits:15,extraPm:49,unitWord:'room',featured:true,defCount:12,
+    prices:{m:1799,q:4999,h:8999,y:14499},incUnits:15,extraPm:49,unitWord:'room',featured:true,defCount:12,
     r1:'15 rooms included',r2:'₹49/room/mo after · unlimited rooms'},
   advance:{label:'Advance',tag:'For OTA-driven hotels — advanced channel sync, Google, revenue tools & in-room dining built in.',
     prices:{m:3999,q:10999,h:20999,y:35999},incUnits:15,extraPm:149,unitWord:'room',defCount:12,
@@ -392,15 +392,30 @@ var PLANS={
     r1:'1 unit, unlimited keys',r2:'₹499/unit/mo per extra listing'}
 };
 var BUNDLES={
-  basic:{name:'Basic Growth Bundle',pm:1699,parts:['cm','rms','smart'],
-    desc:'Get booked everywhere, price smartly and skip the front-desk queue — together for less.',
-    inc:'Basic Channel Manager · RMS dynamic pricing · Smart/self check-in'},
-  advance:{name:'Advance Ops Bundle',pm:1499,parts:['fnb-res','inv-pro','tally'],
-    desc:'Run the whole property — restaurant, stock and accounting in one bundle.',
-    inc:'Restaurant billing · Inventory Pro · Tally integration'},
-  homestay:{name:'Homestay Bundle',pm:899,parts:['cm','smart'],
-    desc:'Get booked everywhere and let guests check themselves in.',
-    inc:'Basic Channel Manager · Smart/self check-in'}
+  basic:[
+    {id:'growth',name:'Growth Bundle',pm:1699,parts:['cm','rms','smart'],
+      inc:'Basic Channel Manager · RMS dynamic pricing · Smart/self check-in'},
+    {id:'fnbops',name:'F&B + Back Office Bundle',pm:1599,parts:['fnb-all','inv-pro','tally'],
+      inc:'F&B suite · Inventory Pro · Tally integration'},
+    {id:'comp',name:'Compliance & Check-in Bundle',pm:599,parts:['formc','sci','smart'],
+      inc:'Form C · State compliance · Smart/self check-in'}
+  ],
+  advance:[
+    {id:'ops',name:'Advance Ops Bundle',pm:1499,parts:['fnb-res','inv-pro','tally'],
+      inc:'Restaurant billing · Inventory Pro · Tally integration'},
+    {id:'resto',name:'Restaurant Starter Bundle',pm:699,parts:['fnb-res','inv-pro'],
+      inc:'Restaurant billing · Inventory Pro'},
+    {id:'back',name:'Back Office Bundle',pm:1099,parts:['tally','sci'],
+      inc:'Tally integration · State compliance'}
+  ],
+  homestay:[
+    {id:'booked',name:'Get Booked Bundle',pm:899,parts:['cm','smart'],
+      inc:'Basic Channel Manager · Smart/self check-in'},
+    {id:'growth',name:'Growth Bundle',pm:1599,parts:['cm','rms','smart'],
+      inc:'Basic Channel Manager · RMS dynamic pricing · Smart/self check-in'},
+    {id:'comp',name:'Compliance & Check-in Bundle',pm:599,parts:['formc','sci','smart'],
+      inc:'Form C · State compliance · Smart/self check-in'}
+  ]
 };
 var FEATURES=[
   {sec:'Rooms & pricing'},
@@ -469,8 +484,12 @@ var ONBOARD={homestay:1999,basic:2999,advance:4999};
 function obFee(){return ONBOARD[state.plan];}
 var COUPONS={q:{code:'QUARTER25',off:0.25,label:'25% off onboarding'},h:{code:'HALF50',off:0.5,label:'50% off onboarding'},y:{code:'ANNUALFREE',off:1,label:'onboarding completely free'}};
 var TERM_NAMES={q:'quarterly',h:'half-yearly',y:'yearly'};
-var state={step:1,term:'y',plan:'basic',bundle:false,counts:{homestay:1,basic:12,advance:12},checks:{},radios:{fnb:'fnb-none',invg:'inv-none'},onetime:{},otaQty:0,coupon:null,
+var state={step:1,term:'y',plan:'basic',bundle:null,counts:{homestay:1,basic:12,advance:12},checks:{},radios:{fnb:'fnb-none',invg:'inv-none'},onetime:{},otaQty:0,coupon:null,
   kit:{branding:'std',qty:{self:0,ird:0,table:0}}};
+function activeBundle(){
+  if(!state.bundle)return null;
+  return (BUNDLES[state.plan]||[]).filter(function(b){return b.id===state.bundle;})[0]||null;
+}
 function cnt(){return state.counts[state.plan];}
 function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
 function effInr(n){return '₹'+Math.floor(n).toLocaleString('en-IN');}
@@ -495,7 +514,7 @@ function quote(){
   var lines=[{l:p.label+' plan <small>'+t.label+' billing · '+p.incUnits+' '+p.unitWord+(p.incUnits>1?'s':'')+' included</small>',v:inr(sub)}];
   if(extra>0)lines.push({l:'Extra '+p.unitWord+'s ×'+extraN,v:inr(extra)});
   var addTotal=0;
-  var bundle=BUNDLES[state.plan],bundleOn=state.bundle&&bundle;
+  var bundle=activeBundle(),bundleOn=!!bundle;
   if(bundleOn){addTotal+=bundle.pm*months;lines.push({l:bundle.name+' <small>'+bundle.inc+'</small>',v:inr(bundle.pm*months)});}
   GROUPS.forEach(function(g){
     if(g.includedIn&&g.includedIn.indexOf(state.plan)>=0)return;
@@ -540,7 +559,7 @@ function renderPlans(){
   });
   host.innerHTML=html;
   host.querySelectorAll('.pcard').forEach(function(c){
-    function pick(){if(state.bundle)toggleBundle(false);state.plan=c.dataset.p;renderPlans();renderFtable();syncBar();}
+    function pick(){if(state.bundle)toggleBundle(state.bundle);state.plan=c.dataset.p;renderPlans();renderFtable();syncBar();}
     c.addEventListener('click',pick);
     c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
   });
@@ -622,34 +641,40 @@ function bump(d){state.counts[state.plan]=Math.min(200,Math.max(1,cnt()+d));rend
 document.getElementById('rooms').addEventListener('input',function(){var v=parseInt(this.value,10);if(!isNaN(v)){state.counts[state.plan]=Math.min(200,Math.max(1,v));renderRooms();syncBar();}});
 
 /* ---------- step 4: extras ---------- */
-function bundleSave(){
-  var b=BUNDLES[state.plan];if(!b)return 0;
+function bundleSave(b){
   var sum=0;
   GROUPS.forEach(function(g){g.items.forEach(function(it){if(b.parts.indexOf(it.id)>=0)sum+=pmOf(it);});});
   return Math.max(0,sum-b.pm);
 }
-function toggleBundle(on){
-  state.bundle=on;
-  var b=BUNDLES[state.plan];
-  if(b){
-    b.parts.forEach(function(pid){
-      if(pid.indexOf('fnb-')===0)state.radios.fnb=on?pid:'fnb-none';
-      else if(pid.indexOf('inv-')===0)state.radios.invg=on?pid:'inv-none';
-      else state.checks[pid]=on;
-    });
-  }
+function setBundleParts(b,on){
+  b.parts.forEach(function(pid){
+    if(pid.indexOf('fnb-')===0)state.radios.fnb=on?pid:'fnb-none';
+    else if(pid.indexOf('inv-')===0)state.radios.invg=on?pid:'inv-none';
+    else state.checks[pid]=on;
+  });
+}
+function toggleBundle(id){
+  var prev=activeBundle();
+  if(prev)setBundleParts(prev,false);
+  state.bundle=(prev&&prev.id===id)?null:id;
+  var nb=activeBundle();
+  if(nb)setBundleParts(nb,true);
   renderAddons();syncBar();
 }
 function renderAddons(){
   normalizeState();
   var host=document.getElementById('addon-area'),html='';
-  var b=BUNDLES[state.plan],bundleOn=state.bundle&&b;
-  if(b){
-    html+='<p class="x-title">Bundle &amp; save <span class="o-save">Save '+inr(bundleSave())+'/mo</span></p>'
-      +'<p class="x-sub">'+b.desc+'</p>'
-      +'<label class="opt'+(bundleOn?' on':'')+'"><input type="checkbox" id="bundle-cb"'+(bundleOn?' checked':'')+'>'
-      +'<span class="o-name">'+b.name+'<span class="o-desc">'+b.inc+'</span></span>'
-      +'<span class="o-price">'+inr(b.pm)+'/mo</span></label>';
+  var blist=BUNDLES[state.plan]||[],bundleOn=activeBundle();
+  if(blist.length){
+    html+='<p class="x-title">Bundles — pick one &amp; save</p>'
+      +'<p class="x-sub">Popular add-ons packaged together for less. Tap to select, tap again to remove.</p>';
+    blist.forEach(function(b){
+      var on=state.bundle===b.id;
+      html+='<label class="opt'+(on?' on':'')+'"><input type="checkbox" data-bundle="'+b.id+'"'+(on?' checked':'')+'>'
+        +'<span class="o-name">'+b.name+'<span class="o-desc">'+b.inc+'</span></span>'
+        +'<span class="o-price">'+inr(b.pm)+'/mo</span>'
+        +'<span class="o-save">Save '+inr(bundleSave(b))+'/mo</span></label>';
+    });
   }
   GROUPS.forEach(function(g){
     var included=g.includedIn&&g.includedIn.indexOf(state.plan)>=0;
@@ -662,7 +687,7 @@ function renderAddons(){
     if(!included){
       itemsFor(g).forEach(function(it){
         var incAdv=it.incAdv&&state.plan==='advance';
-        var inBundle=bundleOn&&b.parts.indexOf(it.id)>=0;
+        var inBundle=!!bundleOn&&bundleOn.parts.indexOf(it.id)>=0;
         var checked=g.type==='radio'?state.radios[g.id]===it.id:!!state.checks[it.id];
         var lock=incAdv||inBundle;
         var priceHtml=incAdv?'<span class="inc-tag">Included</span>':(inBundle?'<span class="inc-tag">In your bundle</span>':(pmOf(it)?'<span class="o-price">'+inr(pmOf(it))+'/mo</span>':'<span class="o-price" style="color:var(--b400)">₹0</span>'));
@@ -675,8 +700,9 @@ function renderAddons(){
     }
   });
   host.innerHTML=html;
-  var bcb=host.querySelector('#bundle-cb');
-  if(bcb)bcb.addEventListener('change',function(){toggleBundle(this.checked);});
+  host.querySelectorAll('input[data-bundle]').forEach(function(inp){
+    inp.addEventListener('change',function(){toggleBundle(this.dataset.bundle);});
+  });
   host.querySelectorAll('input[data-g]').forEach(function(inp){
     inp.addEventListener('change',function(){
       var g=this.dataset.g,i=this.dataset.i;
