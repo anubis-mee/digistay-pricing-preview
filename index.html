@@ -257,16 +257,16 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 
   <section class="step on" id="step-1">
     <h1>Choose the plan that's right for you</h1>
-    <p class="lead">Change or cancel your plan at any renewal. All prices in INR, exclusive of 18% GST.</p>
+    <p class="lead">Every price on this page includes 18% GST — the price you see is the price you pay. Change or cancel your plan at any renewal.</p>
     <div class="pcards" id="pcards"></div>
     <div class="ftable" id="ftable"></div>
     <div class="faq">
       <h2>Common questions</h2>
-      <details><summary>What is the one-time onboarding fee?</summary><p>It covers everything to go live: data migration, OTA connections, staff training and your dedicated relationship manager's setup time — ₹1,999 for Homestay, ₹2,999 for Basic and ₹4,999 for Advance. It is charged once per property, never again. Coupon codes are available on longer billing terms: 25% off on quarterly, 50% off on half-yearly, and fully waived on yearly — checkout shows you the code that applies.</p></details>
+      <details><summary>What is the one-time onboarding fee?</summary><p>It covers everything to go live: data migration, OTA connections, staff training and your dedicated relationship manager's setup time — ₹1,999 for Homestay, ₹2,999 for Basic and ₹4,999 for Advance, all taxes included. It is charged once per property, never again. Coupon codes are available on longer billing terms: 25% off on quarterly, 50% off on half-yearly, and fully waived on yearly — checkout shows you the code that applies.</p></details>
       <details><summary>How does per-room pricing work?</summary><p>Basic and Advance both include 15 rooms, and you can add as many rooms as you want on either plan. Beyond 15, Basic adds ₹50 per room per month and Advance adds ₹150 — the difference reflects the real cost of syncing each extra room's rates and availability to OTAs and Google.</p></details>
       <details><summary>How is a homestay priced?</summary><p>By the unit, not the key. One listing — however many bedrooms or keys are inside it — is one unit, and Homestay starts at exactly one unit. Each additional listing adds ₹500 per unit per month.</p></details>
       <details><summary>What's the difference between the Basic and Advanced Channel Manager?</summary><p>The Basic Channel Manager (an add-on on Basic and Homestay) syncs rates and availability directly to 50+ major OTAs — Booking.com, MakeMyTrip-Goibibo, Agoda, Airbnb, Expedia and more — with 400+ integrations in total via Channex. The Advanced Channel Manager, built into the Advance plan, connects our advanced distribution network of 2,000+ channels and partners — OTAs, GDS, wholesalers and metasearch — plus Google Hotel ARI and the revenue-management tool.</p></details>
-      <details><summary>Are prices inclusive of GST?</summary><p>Prices are exclusive of GST. 18% GST is added at checkout and shown clearly before you pay — you'll receive a GST invoice for input credit.</p></details>
+      <details><summary>Are prices inclusive of GST?</summary><p>Yes — every price on this page already includes 18% GST. Nothing is added at checkout, and your renewal charge is exactly the number you see. Your invoice shows the full GST break-up, so if your property is on the 18% slab (rooms above ₹7,500) you can still claim input credit.</p></details>
     </div>
   </section>
 
@@ -322,7 +322,7 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
           <p class="coupon-err" id="coupon-err"></p>
         </div>
         <div class="srow" id="coupon-line" style="display:none;"><span class="l" id="coupon-line-l"></span><span class="r free" id="coupon-line-v"></span></div>
-        <div class="srow"><span class="l">GST (18%)</span><span class="r" id="s-gst"></span></div>
+        <div class="srow"><span class="l">Includes GST (18%)<small>already in the prices above — nothing added</small></span><span class="r" id="s-gst"></span></div>
         <div class="srow total"><span class="l">Pay today</span><span class="r" id="s-total"></span></div>
         <p class="once-note" id="s-once-note"></p>
         <div class="renew-box">
@@ -379,13 +379,13 @@ var TERMS={
 };
 var PLANS={
   basic:{label:'Basic',tag:'The full PMS at the simplest price. Add OTA sync when you want it.',
-    prices:{m:1499,q:4199,h:7499,y:11999},incUnits:15,extraPm:50,unitWord:'room',featured:true,defCount:12,
+    prices:{m:1799,q:4999,h:8999,y:14388},incUnits:15,extraPm:50,unitWord:'room',featured:true,defCount:12,
     runits:'15 rooms included · ₹50/room/mo after · unlimited rooms'},
   advance:{label:'Advance',tag:'For OTA-driven hotels — advanced channel sync, Google, revenue tools & in-room dining built in.',
-    prices:{m:3299,q:8999,h:16999,y:29999},incUnits:15,extraPm:150,unitWord:'room',defCount:12,
+    prices:{m:3999,q:10999,h:20999,y:35988},incUnits:15,extraPm:150,unitWord:'room',defCount:12,
     runits:'15 rooms included · ₹150/room/mo after'},
   homestay:{label:'Homestay',tag:'For homestays & villas — priced by the listing, not the room.',
-    prices:{m:1199,q:3499,h:5999,y:9999},incUnits:1,extraPm:500,unitWord:'unit',defCount:1,hs:true,
+    prices:{m:1499,q:4199,h:6999,y:11988},incUnits:1,extraPm:500,unitWord:'unit',defCount:1,hs:true,
     runits:'1 unit, unlimited keys · ₹500/unit/mo per extra listing'}
 };
 var BUNDLES={
@@ -501,7 +501,7 @@ function quote(){
   var pre=sub+extra+addTotal+ob+kitTotal+otTotal;
   var renew=sub+extra+addTotal;
   return {p:p,t:t,months:months,n:n,lines:lines,couponDisc:couponDisc,once:ob+kitTotal+otTotal,
-    gst:pre*0.18,today:pre*1.18,renew:renew*1.18};
+    gst:pre*18/118,today:pre,renew:renew};
 }
 
 /* ---------- step 1: plans ---------- */
@@ -513,7 +513,7 @@ function renderPlans(){
       +'<span class="tick" aria-hidden="true"></span>'
       +(p.featured?'<span class="pop">Most popular</span>':(p.hs?'<span class="hsb">Homestays &amp; villas</span>':'<span style="display:inline-block;height:18px;margin-bottom:8px;"></span>'))
       +'<h3>'+p.label+'</h3><p class="tag">'+p.tag+'</p>'
-      +'<p class="from"><strong>'+inr(p.prices.y/12)+'</strong>/mo <span style="font-size:11.5px;">billed yearly · '+inr(p.prices.m)+'/mo monthly</span></p>'
+      +'<p class="from"><strong>'+inr(p.prices.y/12)+'</strong>/mo <span style="font-size:11.5px;">billed yearly, all taxes included · '+inr(p.prices.m)+'/mo monthly</span></p>'
       +'<p class="runits">'+p.runits+'</p></div>';
   });
   host.innerHTML=html;
@@ -739,11 +739,11 @@ function renderReview(){
   document.getElementById('s-gst').textContent=inr(q.gst);
   document.getElementById('s-total').textContent=inr(q.today);
   var onceEl=document.getElementById('s-once-note');
-  if(q.once>0){onceEl.style.display='';onceEl.textContent='Includes '+inr(q.once*1.18)+' of one-time charges (incl. GST) — paid only today.';}
+  if(q.once>0){onceEl.style.display='';onceEl.textContent='Includes '+inr(q.once)+' of one-time charges — paid only today.';}
   else{onceEl.style.display='none';}
   document.getElementById('rb-label').textContent=q.t.word;
   document.getElementById('s-renew').textContent=inr(q.renew);
-  document.getElementById('s-renew-sub').textContent=(q.months>1?inr(q.renew/q.months)+'/mo effective · ':'')+'incl. 18% GST · '+q.p.label+' + your add-ons only';
+  document.getElementById('s-renew-sub').textContent=(q.months>1?inr(q.renew/q.months)+'/mo effective · ':'')+'all taxes included · '+q.p.label+' + your add-ons only';
 }
 function applyCoupon(){
   var v=document.getElementById('coupon-in').value.trim().toUpperCase(),err=document.getElementById('coupon-err'),c=COUPONS[state.term];
@@ -845,7 +845,7 @@ function nav(d){
 function syncBar(){
   var q=quote();
   document.getElementById('bar-total').textContent='Today '+inr(q.today);
-  document.getElementById('bar-sub').textContent='Then '+inr(q.renew)+' '+q.t.short+' · '+q.p.label+' · '+q.n+' '+q.p.unitWord+(q.n>1?'s':'')+' · incl. GST';
+  document.getElementById('bar-sub').textContent='Then '+inr(q.renew)+' '+q.t.short+' · '+q.p.label+' · '+q.n+' '+q.p.unitWord+(q.n>1?'s':'')+' · all taxes included';
   if(state.step===5)renderReview();
 }
 showStep(1);
