@@ -263,8 +263,8 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
     <div class="faq">
       <h2>Common questions</h2>
       <details><summary>What is the one-time onboarding fee?</summary><p>It covers everything to go live: data migration, OTA connections, staff training and your dedicated relationship manager's setup time — ₹1,999 for Homestay, ₹2,999 for Basic and ₹4,999 for Advance, all taxes included. It is charged once per property, never again. Coupon codes are available on longer billing terms: 25% off on quarterly, 50% off on half-yearly, and fully waived on yearly — checkout shows you the code that applies.</p></details>
-      <details><summary>How does per-room pricing work?</summary><p>Basic and Advance both include 15 rooms, and you can add as many rooms as you want on either plan. Beyond 15, Basic adds ₹50 per room per month and Advance adds ₹150 — the difference reflects the real cost of syncing each extra room's rates and availability to OTAs and Google.</p></details>
-      <details><summary>How is a homestay priced?</summary><p>By the unit, not the key. One listing — however many bedrooms or keys are inside it — is one unit, and Homestay starts at exactly one unit. Each additional listing adds ₹500 per unit per month.</p></details>
+      <details><summary>How does per-room pricing work?</summary><p>Basic and Advance both include 15 rooms, and you can add as many rooms as you want on either plan. Beyond 15, Basic adds ₹49 per room per month and Advance adds ₹149 — the difference reflects the real cost of syncing each extra room's rates and availability to OTAs and Google. All rates include GST.</p></details>
+      <details><summary>How is a homestay priced?</summary><p>By the unit, not the key. One listing — however many bedrooms or keys are inside it — is one unit, and Homestay starts at exactly one unit. Each additional listing adds ₹499 per unit per month, taxes included.</p></details>
       <details><summary>What's the difference between the Basic and Advanced Channel Manager?</summary><p>The Basic Channel Manager (an add-on on Basic and Homestay) syncs rates and availability directly to 50+ major OTAs — Booking.com, MakeMyTrip-Goibibo, Agoda, Airbnb, Expedia and more — with 400+ integrations in total via Channex. The Advanced Channel Manager, built into the Advance plan, connects our advanced distribution network of 2,000+ channels and partners — OTAs, GDS, wholesalers and metasearch — plus Google Hotel ARI and the revenue-management tool.</p></details>
       <details><summary>Are prices inclusive of GST?</summary><p>Yes — every price on this page already includes 18% GST. Nothing is added at checkout, and your renewal charge is exactly the number you see. Your invoice shows the full GST break-up, so if your property is on the 18% slab (rooms above ₹7,500) you can still claim input credit.</p></details>
     </div>
@@ -379,14 +379,14 @@ var TERMS={
 };
 var PLANS={
   basic:{label:'Basic',tag:'The full PMS at the simplest price. Add OTA sync when you want it.',
-    prices:{m:1799,q:4999,h:8999,y:14388},incUnits:15,extraPm:50,unitWord:'room',featured:true,defCount:12,
-    runits:'15 rooms included · ₹50/room/mo after · unlimited rooms'},
+    prices:{m:1799,q:4999,h:8999,y:14399},incUnits:15,extraPm:49,unitWord:'room',featured:true,defCount:12,
+    runits:'15 rooms included · ₹49/room/mo after · unlimited rooms'},
   advance:{label:'Advance',tag:'For OTA-driven hotels — advanced channel sync, Google, revenue tools & in-room dining built in.',
-    prices:{m:3999,q:10999,h:20999,y:35988},incUnits:15,extraPm:150,unitWord:'room',defCount:12,
-    runits:'15 rooms included · ₹150/room/mo after'},
+    prices:{m:3999,q:10999,h:20999,y:35999},incUnits:15,extraPm:149,unitWord:'room',defCount:12,
+    runits:'15 rooms included · ₹149/room/mo after'},
   homestay:{label:'Homestay',tag:'For homestays & villas — priced by the listing, not the room.',
-    prices:{m:1499,q:4199,h:6999,y:11988},incUnits:1,extraPm:500,unitWord:'unit',defCount:1,hs:true,
-    runits:'1 unit, unlimited keys · ₹500/unit/mo per extra listing'}
+    prices:{m:1499,q:4199,h:6999,y:11999},incUnits:1,extraPm:499,unitWord:'unit',defCount:1,hs:true,
+    runits:'1 unit, unlimited keys · ₹499/unit/mo per extra listing'}
 };
 var BUNDLES={
   basic:{name:'Basic Growth Bundle',pm:1699,parts:['cm','rms','smart'],
@@ -400,7 +400,7 @@ var BUNDLES={
     inc:'Basic Channel Manager · Smart/self check-in'}
 };
 var FEATURES=[
-  {n:'Rooms / units included',v:{basic:'15 + ₹50/room',advance:'15 + ₹150/room',homestay:'1 unit + ₹500'}},
+  {n:'Rooms / units included',v:{basic:'15 + ₹49/room',advance:'15 + ₹149/room',homestay:'1 unit + ₹499'}},
   {n:'Front desk, billing, ledger, reports',v:{basic:'y',advance:'y',homestay:'y'}},
   {n:'Booking engine + WhatsApp',v:{basic:'y',advance:'y',homestay:'y'}},
   {n:'Digi AI + BI dashboard',v:{basic:'y',advance:'y',homestay:'y'}},
@@ -413,36 +413,36 @@ var FEATURES=[
 var GROUPS=[
   {id:'cm',type:'check',title:'Basic Channel Manager',sub:'Live rate & availability sync for all your rooms. <button class="dir-link" onclick="openDir(\'basic\')">View OTA integrations →</button>',
    titleAdv:'Advanced Channel Manager',subAdv:'2,000+ channels &amp; partners — OTAs, GDS, wholesalers, metasearch — synced for all your rooms. <button class="dir-link" onclick="openDir(\'adv\')">View all integrations →</button>',
-   items:[{id:'cm',name:'Basic Channel Manager',desc:'Booking.com, MMT-Goibibo, Agoda, Airbnb & 50+ more via Channex',pm:{m:999,q:833,h:833,y:833}}],includedIn:['advance']},
+   items:[{id:'cm',name:'Basic Channel Manager',desc:'Booking.com, MMT-Goibibo, Agoda, Airbnb & 50+ more via Channex',pm:{m:999,q:833,h:833.17,y:833.25}}],includedIn:['advance']},
   {id:'fnb',type:'radio',title:'Food & beverage',sub:'Pick the F&B suite, or just the piece you need — never both.',
    items:[{id:'fnb-none',name:'Not needed',pm:0},
-          {id:'fnb-res',name:'Restaurant billing only',desc:'POS, tables, KOT',pm:500},
-          {id:'fnb-ird',name:'In-room dining only',desc:'Room-service orders to guest folio',pm:300},
-          {id:'fnb-all',name:'F&B suite — both together',desc:'Restaurant billing + in-room dining',pm:700,save:'Save ₹100/mo'}]},
+          {id:'fnb-res',name:'Restaurant billing only',desc:'POS, tables, KOT',pm:499},
+          {id:'fnb-ird',name:'In-room dining only',desc:'Room-service orders to guest folio',pm:299},
+          {id:'fnb-all',name:'F&B suite — both together',desc:'Restaurant billing + in-room dining',pm:699,save:'Save ₹99/mo'}]},
   {id:'invg',type:'radio',title:'Inventory',sub:'Pro includes everything in standard inventory.',
    items:[{id:'inv-none',name:'Not needed',pm:0},
-          {id:'inv-std',name:'Inventory',desc:'Stock tracking & purchase',pm:200},
-          {id:'inv-pro',name:'Inventory Pro',desc:'Adds recipe-level costing',pm:300}]},
+          {id:'inv-std',name:'Inventory',desc:'Stock tracking & purchase',pm:199},
+          {id:'inv-pro',name:'Inventory Pro',desc:'Adds recipe-level costing',pm:299}]},
   {id:'ops',type:'check',title:'Operations & compliance',
-   items:[{id:'smart',name:'Smart / self check-in',desc:'Guests check themselves in from their phone',pm:300,incAdv:true},
-          {id:'formc',name:'Form C',desc:'Foreign-guest reporting, auto-filed',pm:200,incAdv:true},
-          {id:'sci',name:'State compliance integration',desc:'State police / tourism reporting',pm:200},
-          {id:'rms',name:'RMS — dynamic pricing tool',desc:'Rules-based rate recommendations',pm:1000,incAdv:true},
-          {id:'tally',name:'Tally integration',desc:'Daily posting into your Tally books',pm:1000}]}
+   items:[{id:'smart',name:'Smart / self check-in',desc:'Guests check themselves in from their phone',pm:299,incAdv:true},
+          {id:'formc',name:'Form C',desc:'Foreign-guest reporting, auto-filed',pm:199,incAdv:true},
+          {id:'sci',name:'State compliance integration',desc:'State police / tourism reporting',pm:199},
+          {id:'rms',name:'RMS — dynamic pricing tool',desc:'Rules-based rate recommendations',pm:999,incAdv:true},
+          {id:'tally',name:'Tally integration',desc:'Daily posting into your Tally books',pm:999}]}
 ];
 var KIT_TYPES=[
   {id:'self',name:'Self check-in QR codes'},
   {id:'ird',name:'Room dining QR codes'},
   {id:'table',name:'Table QR codes'}
 ];
-var KIT_RATES={std:{label:'Standard',perQr:200},co:{label:'Co-branded',perQr:300},custom:{label:'Custom-branded',perQr:400}};
-var OTA_LISTING=2000;
+var KIT_RATES={std:{label:'Standard',perQr:199},co:{label:'Co-branded',perQr:299},custom:{label:'Custom-branded',perQr:399}};
+var OTA_LISTING=1999;
 var ONETIME=[
   {id:'reach',name:'Essential Reach — 3-OTA optimization',price:4999},
   {id:'b5',name:'5-OTA bundle + Google listing',price:10999},
   {id:'b12',name:'12-OTA bundle + Google listing',price:16999},
-  {id:'gl',name:'Google listing',price:3500},
-  {id:'web',name:'Property website',price:10000}
+  {id:'gl',name:'Google listing',price:3499},
+  {id:'web',name:'Property website',price:9999}
 ];
 var ONBOARD={homestay:1999,basic:2999,advance:4999};
 function obFee(){return ONBOARD[state.plan];}
@@ -452,6 +452,7 @@ var state={step:1,term:'y',plan:'basic',bundle:false,counts:{homestay:1,basic:12
   kit:{branding:'std',qty:{self:0,ird:0,table:0}}};
 function cnt(){return state.counts[state.plan];}
 function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+function effInr(n){return '₹'+Math.floor(n).toLocaleString('en-IN');}
 function pmOf(item){return typeof item.pm==='object'?item.pm[state.term]:item.pm;}
 function itemsFor(g){
   if(g.id==='fnb'&&state.plan==='advance')return g.items.filter(function(it){return it.id==='fnb-none'||it.id==='fnb-res';});
@@ -513,7 +514,7 @@ function renderPlans(){
       +'<span class="tick" aria-hidden="true"></span>'
       +(p.featured?'<span class="pop">Most popular</span>':(p.hs?'<span class="hsb">Homestays &amp; villas</span>':'<span style="display:inline-block;height:18px;margin-bottom:8px;"></span>'))
       +'<h3>'+p.label+'</h3><p class="tag">'+p.tag+'</p>'
-      +'<p class="from"><strong>'+inr(p.prices.y/12)+'</strong>/mo <span style="font-size:11.5px;">billed yearly, all taxes included · '+inr(p.prices.m)+'/mo monthly</span></p>'
+      +'<p class="from"><strong>'+effInr(p.prices.y/12)+'</strong>/mo <span style="font-size:11.5px;">billed yearly, all taxes included · '+inr(p.prices.m)+'/mo monthly</span></p>'
       +'<p class="runits">'+p.runits+'</p></div>';
   });
   host.innerHTML=html;
@@ -555,7 +556,7 @@ function renderTerms(){
       +'<span class="t-main"><span class="t-name">'+t.label
       +(k==='y'?'<span class="badge best">BEST VALUE · onboarding-free coupon</span>':'')
       +'</span><span class="t-note" style="display:block;">'+(c?'Coupon '+c.code+' — '+c.label:'Full onboarding fee applies')+'</span></span>'
-      +'<span class="t-price"><span class="t-pm" style="display:block;">'+inr(pm)+'<span>/mo</span></span>'
+      +'<span class="t-price"><span class="t-pm" style="display:block;">'+effInr(pm)+'<span>/mo</span></span>'
       +'<span class="t-billed">'+(t.months>1?inr(pr)+' billed '+t.label.toLowerCase():'billed monthly')+'</span></span></div>';
   });
   host.innerHTML=html;
@@ -743,7 +744,7 @@ function renderReview(){
   else{onceEl.style.display='none';}
   document.getElementById('rb-label').textContent=q.t.word;
   document.getElementById('s-renew').textContent=inr(q.renew);
-  document.getElementById('s-renew-sub').textContent=(q.months>1?inr(q.renew/q.months)+'/mo effective · ':'')+'all taxes included · '+q.p.label+' + your add-ons only';
+  document.getElementById('s-renew-sub').textContent=(q.months>1?effInr(q.renew/q.months)+'/mo effective · ':'')+'all taxes included · '+q.p.label+' + your add-ons only';
 }
 function applyCoupon(){
   var v=document.getElementById('coupon-in').value.trim().toUpperCase(),err=document.getElementById('coupon-err'),c=COUPONS[state.term];
